@@ -8,8 +8,9 @@ OR: Use tkinter for interface design
 
 import tkinter as tk
 window=tk.Tk()
+window.title("Main Page")
 window.geometry("500x450")
-window.config(bg="Black",text="Name")
+window.config(bg="Black")
 
 frame1=tk.Frame(window,bg="Black",highlightbackground="White",highlightthickness=1,width=80,height=50)
 frame1.grid(row=0,column=0)
