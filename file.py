@@ -1,3 +1,10 @@
+'''
+Name: Michael McMahon
+Title: Main Page
+Goal: Print out a main page and to create buttons that direct to other pages
+OR: Use tkinter for GUI
+'''
+
 import tkinter as tk
 window=tk.Tk()
 window.geometry("500x450")
