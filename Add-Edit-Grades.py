@@ -1,3 +1,11 @@
+'''
+Title: Add/Edit Grades in LMS
+Author: Gabrielle Knapp
+Date: 11/9/2022
+
+Goal: Allow users to add new grades to previously uploaded data or to edit a grade from data previously uploaded
+
+'''
 from tkinter import *
 window=Tk()
 btn1=Button(window, text="Apply", fg='blue')
