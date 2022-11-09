@@ -1,3 +1,11 @@
+'''
+Author: Michael McMahon
+Title: Main Page
+Date: November 9, 2022
+Goal: Print out a main page and to create buttons that direct to other pages
+OR: Use tkinter for interface design
+'''
+
 import tkinter as tk
 window=tk.Tk()
 window.geometry("500x450")
