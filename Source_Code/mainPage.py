@@ -142,6 +142,12 @@ semesterLabel.grid(row=0,column=0, sticky = W)
 gpaLabel = tk.Label(gpaFrame, bg = "Gray", fg = "White", text = "GPA:", font = 'Helvetica 12 bold')
 gpaLabel.grid(row=0,column=0, sticky = W)
 
+#first time setup
+frame6=tk.Frame(window,bg="Gray",highlightbackground="White",highlightthickness=1,width=500,height=150)
+frame6.grid(row=2,column=0)
+ftsLabel = tk.Label(frame6, bg = 'grey', fg = 'White', text = 'First Time Setup Users:\n 1. Add Currest Semester Button\n2. Add Classes (Adjust Current Semester)\n3. Add Grades(Adjust Current Semester)\n4. Add Previous Semester GPA (if Applicable)',font = 'Helvetica 12 bold')
+ftsLabel.grid(row=2,column=0,sticky = W)
+
 # iterates through the files and prints the year, session, and gpa into the GUI
 table = [[],[],[]]
 i = 0
