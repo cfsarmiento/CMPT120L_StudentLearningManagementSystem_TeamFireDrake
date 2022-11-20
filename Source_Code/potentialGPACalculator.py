@@ -27,6 +27,11 @@ c5=0.0
 c6=0.0
 num1=[]
 den1=[]
+
+def Back():
+    window.destroy()
+    import mainPage
+
 def calculate():
     numerator=0.0
     denominator=0.0
@@ -362,6 +367,7 @@ entbox8c.grid(row=9,column=3)
 continue1=tk.Button(window,bg='grey',fg='white',text='Calculate',font='Helvetica 12 bold',command=calculate)
 continue1.grid(column=0,row=11,pady=45)
 
-
+backButton = tk.Button(window,text = 'Back',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = Back)
+backButton.grid(row = 0, column = 12)
 
 window.mainloop()
