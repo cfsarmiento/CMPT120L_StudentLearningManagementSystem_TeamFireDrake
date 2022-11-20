@@ -1,3 +1,24 @@
+'''
+Title: Student Learning Management System
+Window: Add Previous Semester
+Author: Christian Sarmiento
+Class: CMPT120L
+Professor: Reza Sadeghi
+Goal: Allows student to add past GPAs 
+Widgets:
+    semester_settings - main window
+    inputFrame - frame for all the user input
+    addGPALabel - Label for inputFrame to input gpa info
+    yearLabel - Label to go next to input spot for year
+    entryYear - Text box so user can put the year for past gpa
+    sessionLabel - Label for session (Fall/Winter/Spring/Summer)
+    entrySession - Text box so user can input the session
+    finalGPALabel - Label for GPA entry box
+    entryFinalGPA - Text box so user can input final gpa
+    btnFinalize - Button to finalize GPA into system (cannot be undone)
+    
+Other Requirements: TKInter for Interface Design.
+'''
 import tkinter as tk
 
 # Window
