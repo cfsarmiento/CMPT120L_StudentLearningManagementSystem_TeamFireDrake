@@ -21,7 +21,7 @@ os.chdir(pathlib.Path(__file__).parent.resolve())
 window=tk.Tk()
 window.configure(bg='grey')
 window.title('Create Account')
-window.geometry('375x125')
+window.geometry('375x130')
 
 def CreateAccount():
     username = usernameEntry.get()
