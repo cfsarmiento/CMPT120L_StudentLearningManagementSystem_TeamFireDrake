@@ -30,12 +30,11 @@ def CreateAccount():
     accountFolders = list[int]()
     for path in os.listdir(os.getcwd()):
         if os.path.isdir(os.path.join(os.getcwd(), path)):
+            pathNum = int(path[path.index("t")+1:])
             if (len(accountFolders) == 0):
-                accountFolders.append(path)
+                accountFolders.append(pathNum)
             for folder in accountFolders:
-                pathNum = int(path[path.index("t")+1:])
-                folderNum = int(folder[folder.index("t")+1:])
-                if (pathNum > folderNum):
+                if (pathNum > folder):
                     accountFolders.insert(accountFolders.index(folder)+1, pathNum)
     firstAvailableNum = len(accountFolders)
     for i, folder in enumerate(accountFolders):
