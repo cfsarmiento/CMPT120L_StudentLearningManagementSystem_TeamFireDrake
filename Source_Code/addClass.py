@@ -17,7 +17,7 @@ os.chdir(pathlib.Path(__file__).parent.resolve())
 window=tk.Tk()
 window.configure(bg='grey')
 window.title('Add Class')
-window.geometry('400x150')
+window.geometry('600x200')
 
 def Homework():
     if homeworkButton["bg"] == "black":

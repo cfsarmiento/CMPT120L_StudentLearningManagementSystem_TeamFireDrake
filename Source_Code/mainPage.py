@@ -38,10 +38,9 @@ def AddPreviousSemester():
     import addPreviousSemester
 
 def AdjustSemester():
-    #import {file name where you pick between add/drop/edit class}
-    #window.destroy()
-    pass
-
+    window.destroy()
+    import adjustCurrentSemester
+    
 frame1=tk.Frame(window,bg="Gray",highlightbackground="White",highlightthickness=1,width=100,height=100)
 frame1.grid(row=0,column=0)
 tk.Label(window,bg="Gray",fg="White",text="SLMS",font='Helvetica 30 bold').grid(row=0,column=0)
