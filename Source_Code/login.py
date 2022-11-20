@@ -51,6 +51,7 @@ def Login():
         errorLabel.grid(column = 2, row = 1)
 
 def CreateAccount():
+    window.destroy()
     import createAccount
 
 usernameLabel=tk.Label(window, text = 'Username: ', bg='grey', fg = 'white', font='Helvetica 12 bold')
