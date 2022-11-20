@@ -1,3 +1,11 @@
+#Title: Student Learning Management System
+#Window: Class Management System
+#Authors: Cody Carruthers and Gabrielle Knapp
+#Class: CMPT120L
+#Professor: Reza Sadeghi
+#Goal: Prints the classes, homework, weights, grades for the student
+#Other Requirements: TKInter for Interface Design.
+
 import tkinter as tk
 from tkinter import *
 
