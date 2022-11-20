@@ -30,7 +30,7 @@ def Login():
         for line in reader:
             if (username == line[0] and password == line[1]):
                 window.destroy()
-                import mainPageProject
+                import mainPage
             else:
                 errorLabel = tk.Label(window, text = "Username or password incorrect", fg = 'black')
                 errorLabel.grid(column = 2, row = 1)
