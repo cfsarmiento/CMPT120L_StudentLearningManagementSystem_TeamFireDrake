@@ -43,6 +43,7 @@ def Finalize():
         writer = csv.writer(csvfile)
         writer.writerow(["Year: " + year, "Session: " + session, "GPA: " + gpa])
     semester_settings.destroy()
+    import mainPage
 
 # Frames
 inputFrame = tk.Frame(semester_settings,
