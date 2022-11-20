@@ -16,9 +16,9 @@ Widgets:
     finalGPALabel - Label for GPA entry box
     entryFinalGPA - Text box so user can input final gpa
     btnFinalize - Button to finalize GPA into system (cannot be undone)
-    
 Other Requirements: TKInter for Interface Design.
 '''
+
 import tkinter as tk
 from tkinter import *
 import os
@@ -29,16 +29,16 @@ os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Semesters"))
 # Window
 semester_settings = tk.Tk()
 semester_settings.title('Add Previous Semester')  # title for window
-semester_settings.geometry('400x250')  # window size
+semester_settings.geometry('300x150')  # window size
 semester_settings.configure(bg ='grey')  # color
 
 def Finalize():
-    year = entryYear.get()
-    session = entrySession.get()
-    gpa = entryFinalGPA.get()
-    if not os.path.exists(f"Semester{year + session}"):
-        os.makedirs(f"Semester{year + session}")
-    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Semesters", f"Semester{year + session}"))
+    year = entryYear.get() # year must be an integer
+    session = entrySession.get() # session must either be "fall", "winter", "spring", "summer"  -  not case sensative
+    gpa = entryFinalGPA.get() # gpa must be a float
+    if not os.path.exists(f"Semester_{year}_{session}"):
+        os.makedirs(f"Semester_{year}_{session}")
+    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Semesters", f"Semester_{year}_{session}"))
     with open("semesterInfo.csv", "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["Year: " + year, "Session: " + session, "GPA: " + gpa])
