@@ -1,3 +1,17 @@
+'''
+***this is a copy saved in the precise name needed to import the file...***
+Title: Create Account
+Window: Create Account Window
+Author: Ethan Morton
+Class: CMPT120L
+Professor: Reza Sadeghi
+Goal: Create a username and password and store it in a csv file
+Widgets:
+    labels: username, password, confirm password
+    entries: username, password, confirm password
+    buttons: create account
+Other Requirements: TKInter for Interface Design.
+'''
 import tkinter as tk
 from tkinter import *
 import os
