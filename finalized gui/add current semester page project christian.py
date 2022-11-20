@@ -1,10 +1,10 @@
 '''
 Title: Student Learning Management System
-Window: Semester Settings Window
+Window: Add current Semester
 Author: Christian Sarmiento
 Class: CMPT120L
 Professor: Reza Sadeghi
-Goal: Allows student to add a new semester to add classes to
+Goal: Allows student to add a new semester which they can add classes to
 Widgets:
     new_semester - main window
     newSemesterFrame - frame for input and button
