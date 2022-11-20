@@ -32,7 +32,7 @@ os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountF
 # Window
 new_semester = tk.Tk()
 new_semester.title('Add Current Semester') # title
-new_semester.geometry('300x150')  # window dimensions
+new_semester.geometry('300x175')  # window dimensions
 new_semester.configure(bg = 'grey')  # color
 
 def CreateSemester():
@@ -43,7 +43,11 @@ def CreateSemester():
     os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", f"Semester_{year}_{session}"))
     with open("semesterInfo.csv", "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(["Year: " + year, "Session: " + session])
+        writer.writerow(["Year: " + year, "Session: " + session, "GPA: "])
+    new_semester.destroy()
+    import mainPage
+
+def Back():
     new_semester.destroy()
     import mainPage
 
@@ -97,5 +101,8 @@ btnNewSemester = tk.Button(newSemesterFrame,
                            padx = 55,
                            command = CreateSemester)
 btnNewSemester.grid(row = 2, column = 1)
+
+backButton = tk.Button(newSemesterFrame,text = 'Back',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = Back)
+backButton.grid(row = 3, column = 1)
 
 new_semester.mainloop()

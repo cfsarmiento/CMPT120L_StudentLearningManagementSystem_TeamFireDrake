@@ -51,6 +51,10 @@ def Finalize():
     semester_settings.destroy()
     import mainPage
 
+def Back():
+    semester_settings.destroy()
+    import mainPage
+
 # Frames
 inputFrame = tk.Frame(semester_settings,
                       bg = 'grey',
@@ -118,6 +122,7 @@ btnFinalize = tk.Button(inputFrame,
                         command = Finalize)
 btnFinalize.grid(row = 3, column = 1)
 
-
+backButton = tk.Button(inputFrame,text = 'Back',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = Back)
+backButton.grid(row = 4, column = 1)
                              
 semester_settings.mainloop()
