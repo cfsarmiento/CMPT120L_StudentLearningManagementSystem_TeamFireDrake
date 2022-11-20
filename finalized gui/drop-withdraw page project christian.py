@@ -1,3 +1,13 @@
+'''
+Title: Student Learning Management System
+Window: Drop/Withdrawl Window
+Authors: Christian Sarmiento and Gabrielle Knapp
+Class: CMPT120L
+Professor: Reza Sadeghi
+Goal: Allows user to drop or withdraw from a class they are currently enrolled and taking
+Widgets:   
+Other Requirements: TKInter for Interface Design.
+'''
 import tkinter as tk
 
 # Window
