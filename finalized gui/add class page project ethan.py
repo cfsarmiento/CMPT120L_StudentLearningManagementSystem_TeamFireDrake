@@ -1,3 +1,13 @@
+'''
+Title: Add Class
+Window: Add Class Window
+Author: Ethan Morton
+Class: CMPT120L
+Professor: Reza Sadeghi
+Goal: Add a class to track for the calculator
+Widgets: labels and buttons
+Other Requirements: TKInter for Interface Design.
+'''
 import tkinter as tk
 from tkinter import *
 import os
