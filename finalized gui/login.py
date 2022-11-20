@@ -29,9 +29,7 @@ def Login():
         reader = csv.reader(csvfile)
         for line in reader:
             if (username == line[0] and password == line[1]):
-                #import mainPage            # it would be easier to take spaces out of file names
-                #__import__("Main Page")    # this method should work too if we have to use it
-                pass                        # don't forget to remove the pass
+                import mainPage
             else:
                 errorLabel = tk.Label(window, text = "Username or password incorrect", fg = 'black')
                 errorLabel.grid(column = 2, row = 1)
