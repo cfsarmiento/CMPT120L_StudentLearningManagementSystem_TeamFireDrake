@@ -11,64 +11,68 @@ Widgets:
     buttons: login, create account
 Other Requirements: TKInter for Interface Design.
 '''
-import tkinter as tk
-from tkinter import *
-import os
-import csv
-import pathlib
-os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts"))
-window=tk.Tk()
-window.configure(bg='grey')
-window.title('Login')
-window.geometry('400x160')
+def LOGIN():
+    import tkinter as tk
+    #from tkinter import *
+    import os
+    import csv
+    import pathlib
+    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts"))
+    window=tk.Tk()
+    window.configure(bg='grey')
+    window.title('Login')
+    window.geometry('400x160')
 
-def Login():
-    username = usernameEntry.get()
-    password = passwordEntry.get()
-    loginFound = False
-    accountFile = ""
-    for path in os.listdir(os.getcwd()):
-        if os.path.isdir(os.path.join(os.getcwd(), path)):
-            os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", path))
-            with open("loginInfo.csv", "r", newline = "") as csvfile:
-                reader = csv.reader(csvfile)
-                for line in reader:
-                    if (username == line[0] and password == line[1]):
-                        loginFound = True
-                        accountFile = path
-                        break
+    def Login():
+        username = usernameEntry.get()
+        password = passwordEntry.get()
+        loginFound = False
+        accountFile = ""
+        for path in os.listdir(os.getcwd()):
+            if os.path.isdir(os.path.join(os.getcwd(), path)):
+                os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", path))
+                with open("loginInfo.csv", "r", newline = "") as csvfile:
+                    reader = csv.reader(csvfile)
+                    for line in reader:
+                        if (username == line[0] and password == line[1]):
+                            loginFound = True
+                            accountFile = path
+                            break
+            if (loginFound):
+                break
         if (loginFound):
-            break
-    if (loginFound):
-        os.chdir(pathlib.Path(__file__).parent.resolve())
-        with open("currentLogin.csv", "w", newline = "") as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow([accountFile])
-        window.destroy()
-        import mainPage
-    else:
-        errorLabel = tk.Label(window, text = "Username or password incorrect", fg = 'black')
-        errorLabel.grid(column = 2, row = 1)
+            os.chdir(pathlib.Path(__file__).parent.resolve())
+            with open("currentLogin.csv", "w", newline = "") as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow([accountFile])
+            window.destroy()
+            import mainPage
+            mainPage.MAIN_PAGE()
+        else:
+            errorLabel = tk.Label(window, text = "Username or password incorrect", fg = 'black')
+            errorLabel.grid(column = 2, row = 1)
 
-def CreateAccount():
-    window.destroy()
-    import createAccount
+    def CreateAccount():
+        #window.destroy()
+        import createAccount
+        createAccount.CREATE_ACCOUNT()
 
-usernameLabel=tk.Label(window, text = 'Username: ', bg='grey', fg = 'white', font='Helvetica 12 bold')
-usernameLabel.grid(column = 0, row = 0)
-passwordLabel=tk.Label(window, text = 'Password: ', bg='grey', fg = 'white', font='Helvetica 12 bold')
-passwordLabel.grid(column = 0, row = 1)
+    usernameLabel=tk.Label(window, text = 'Username: ', bg='grey', fg = 'white', font='Helvetica 12 bold')
+    usernameLabel.grid(column = 0, row = 0)
+    passwordLabel=tk.Label(window, text = 'Password: ', bg='grey', fg = 'white', font='Helvetica 12 bold')
+    passwordLabel.grid(column = 0, row = 1)
 
-usernameEntry=tk.Entry(window, bg = 'grey', fg='white', font="Helvetica 12 bold" )
-usernameEntry.grid(row = 0, column = 1)
+    usernameEntry=tk.Entry(window, bg = 'grey', fg='white', font="Helvetica 12 bold" )
+    usernameEntry.grid(row = 0, column = 1)
 
-passwordEntry=tk.Entry(window, bg = 'grey', fg='white', font="Helvetica 12 bold")
-passwordEntry.grid(row = 1, column = 1)
+    passwordEntry=tk.Entry(window, bg = 'grey', fg='white', font="Helvetica 12 bold")
+    passwordEntry.grid(row = 1, column = 1)
 
-loginButton=tk.Button(window, bg = 'grey', fg='white', font= 'Helvetica 12 bold',text = 'Login', command = Login)
-loginButton.grid(column = 1, row = 3, pady = 20)
+    loginButton=tk.Button(window, bg = 'grey', fg='white', font= 'Helvetica 12 bold',text = 'Login', command = Login)
+    loginButton.grid(column = 1, row = 3, pady = 20)
 
-createAccountButton=tk.Button(window, bg = 'grey', fg='white', font='Helvetica 12 bold', text = 'Create Account', command = CreateAccount)
-createAccountButton.grid(column = 1, row = 4)
+    createAccountButton=tk.Button(window, bg = 'grey', fg='white', font='Helvetica 12 bold', text = 'Create Account', command = CreateAccount)
+    createAccountButton.grid(column = 1, row = 4)
 
-window.mainloop()
+    window.mainloop()
+LOGIN()
