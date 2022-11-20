@@ -39,6 +39,7 @@ def CreateSemester():
         writer = csv.writer(csvfile)
         writer.writerow(["Year: " + year, "Session: " + session])
     new_semester.destroy()
+    import mainPage
 
 # Frames
 newSemesterFrame = tk.Frame(new_semester,
