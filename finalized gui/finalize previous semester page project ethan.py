@@ -1,3 +1,13 @@
+'''
+Title: Student Learning Management System
+Window: Finalize Semester Window
+Author: Ethan Morton
+Class: CMPT120L
+Professor: Reza Sadeghi
+Goal: Saves the information that was entered into the current semester.
+Widgets: Cancel button, save button, text
+Other Requirements: TKInter for Interface Design.
+'''
 import tkinter as tk
 window = tk.Tk()
 window.title('Finalize Semester')
