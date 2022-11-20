@@ -41,6 +41,13 @@ def AdjustSemester():
     window.destroy()
     import adjustCurrentSemester
     
+def CumulativeRundown():
+    pass
+
+def PotentialGPA_Calculator():
+    window.destroy()
+    import potentialGPACalc
+    
 frame1=tk.Frame(window,bg="Gray",highlightbackground="White",highlightthickness=1,width=100,height=100)
 frame1.grid(row=0,column=0)
 tk.Label(window,bg="Gray",fg="White",text="SLMS",font='Helvetica 30 bold').grid(row=0,column=0)
@@ -165,7 +172,7 @@ frame5.grid(row=1, column=2)
 tk.Button(frame5,bg="Gray",fg="White",text="Add Current Semester",font='Helvetica 12 bold', command = AddCurrentSemester).grid(row=0,column=2, pady=10)
 tk.Button(frame5,bg="Gray",fg="White",text="Add Previous Semester",font='Helvetica 12 bold', command = AddPreviousSemester).grid(row=1, column=2, pady=5)
 tk.Button(frame5,bg="Gray",fg="White",text="Adjust Current Semester",font='Helvetica 12 bold', command = AdjustSemester).grid(row=2,column=2, pady=10)
-tk.Button(frame5,bg="Gray",fg="White",text="Cummulative Rundown",font='Helvetica 12 bold').grid(row=3,column=2,pady=10)
-tk.Button(frame5,bg="Gray",fg="White",text="Potential GPA Calc",font='Helvetica 12 bold').grid(row=4,column=2)
+tk.Button(frame5,bg="Gray",fg="White",text="Cummulative Rundown",font='Helvetica 12 bold', command = CumulativeRundown).grid(row=3,column=2,pady=10)
+tk.Button(frame5,bg="Gray",fg="White",text="Potential GPA Calc",font='Helvetica 12 bold', command = PotentialGPA_Calculator).grid(row=4,column=2)
 
 window.mainloop()
