@@ -44,6 +44,9 @@ def AdjustSemester():
 def PotentialGPA_Calculator():
     window.destroy()
     import potentialGPACalc
+
+def Class(course):
+    pass
     
 frame1=tk.Frame(window,bg="Gray",highlightbackground="White",highlightthickness=1,width=100,height=100)
 frame1.grid(row=0,column=0)
@@ -118,14 +121,16 @@ for semester in semesters:
         elif (year > sortedYear):
             sortedSemesters.append(semester)
             break
-count = -1
+count = -0
 if (mostRecentSemesterFile != ""):
     for path in os.listdir(os.path.join(os.getcwd(), mostRecentSemesterFile)):
         if os.path.isfile(os.path.join(os.getcwd(), mostRecentSemesterFile, path)):
             count += 1
 
-for i in range(1,count):    # this will get the number of classes in the most recent semester and iterate through that number
-    tk.Button(frame3,bg="Gray",fg="White",text="Class "+str(i),font='Helvetica 12 bold').grid(row=3+i,column=0,pady=5)
+for i, file in enumerate(os.listdir(os.path.join(os.getcwd(), mostRecentSemesterFile)), start = 1):
+    if (os.path.isfile(os.path.join(os.getcwd(), mostRecentSemesterFile, file)) and file != "semesterInfo.csv"):
+        course = file[file.index("e")+1:file.index(".")]
+        tk.Button(frame3,bg="Gray",fg="White",text=course,font='Helvetica 12 bold', command=Class(course)).grid(row=3+i,column=0,pady=5)
 
 frame4=tk.Frame(window,bg="Gray",highlightbackground="White",highlightthickness=1,width=500,height=100)
 frame4.grid(row=1,column=1)
