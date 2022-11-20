@@ -20,12 +20,29 @@ Widgets:
 Other Requirements: TKInter for Interface Design.
 '''
 import tkinter as tk
+from tkinter import *
+import os
+import csv
+import pathlib
+os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Semesters"))
 
 # Window
 semester_settings = tk.Tk()
 semester_settings.title('Add Previous Semester')  # title for window
 semester_settings.geometry('400x250')  # window size
 semester_settings.configure(bg ='grey')  # color
+
+def Finalize():
+    year = entryYear.get()
+    session = entrySession.get()
+    gpa = entryFinalGPA.get()
+    if not os.path.exists(f"Semester{year + session}"):
+        os.makedirs(f"Semester{year + session}")
+    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Semesters", f"Semester{year + session}"))
+    with open("semesterInfo.csv", "w", newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["Year: " + year, "Session: " + session, "GPA: " + gpa])
+    semester_settings.destroy()
 
 # Frames
 inputFrame = tk.Frame(semester_settings,
@@ -90,7 +107,8 @@ btnFinalize = tk.Button(inputFrame,
                         text = 'Finalize',
                         bg = 'grey',
                         fg = 'white',
-                        padx = 55)
+                        padx = 55,
+                        command = Finalize)
 btnFinalize.grid(row = 3, column = 1)
 
 
