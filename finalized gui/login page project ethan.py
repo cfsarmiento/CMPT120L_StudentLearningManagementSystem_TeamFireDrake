@@ -1,3 +1,16 @@
+'''
+Title: Login
+Window: Login Window
+Author: Ethan Morton
+Class: CMPT120L
+Professor: Reza Sadeghi
+Goal: Enter username and password correctly to access the program
+Widgets:
+    labels: username, password
+    entries: username, password
+    buttons: login, create account
+Other Requirements: TKInter for Interface Design.
+'''
 import tkinter as tk
 from tkinter import *
 import os
