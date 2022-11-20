@@ -1,3 +1,21 @@
+'''
+Title: Student Learning Management System
+Window: Semester Settings Window
+Author: Christian Sarmiento
+Class: CMPT120L
+Professor: Reza Sadeghi
+Goal: Allows student to add a new semester to add classes to
+Widgets:
+    new_semester - main window
+    newSemesterFrame - frame for input and button
+    createSemesterLabel - Label for frame
+    newYearLabel - Label for year input window
+    entryNewYear - year input window
+    newSessionLabel - Label for session input window
+    entrySessionYear - session input window
+    btnNewSemester - Button to create new semester with input   
+Other Requirements: TKInter for Interface Design.
+'''
 import tkinter as tk
 
 # Window
