@@ -17,7 +17,7 @@ from tkinter import *
 import os
 import csv
 import pathlib
-os.chdir(pathlib.Path(__file__).parent.resolve())
+os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts"))
 window=tk.Tk()
 window.configure(bg='grey')
 window.title('Create Account')
@@ -27,8 +27,25 @@ def CreateAccount():
     username = usernameEntry.get()
     password = passwordEntry.get()
     confirm = confirmEntry.get()
+    accountFolders = list[int]()
+    for path in os.listdir(os.getcwd()):
+        if os.path.isdir(os.path.join(os.getcwd(), path)):
+            if (len(accountFolders) == 0):
+                accountFolders.append(path)
+            for folder in accountFolders:
+                pathNum = int(path[path.index("t")+1:])
+                folderNum = int(folder[folder.index("t")+1:])
+                if (pathNum > folderNum):
+                    accountFolders.insert(accountFolders.index(folder)+1, pathNum)
+    firstAvailableNum = len(accountFolders)
+    for i, folder in enumerate(accountFolders):
+        if (folder != i):
+            firstAvailableNum = i
+            break
+    os.makedirs(os.path.join(os.getcwd(), "Account" + str(firstAvailableNum)))
+    os.chdir(os.path.join(os.getcwd(), "Account" + str(firstAvailableNum)))
     if (password == confirm):
-        with open("account.csv", "w", newline = "") as csvfile:
+        with open("loginInfo.csv", "w", newline = "") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([username, password])
         window.destroy()

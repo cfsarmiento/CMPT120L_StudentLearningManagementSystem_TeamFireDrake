@@ -13,7 +13,16 @@ from tkinter import *
 import os
 import csv
 import pathlib
-os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Semesters"))
+os.chdir(pathlib.Path(__file__).parent.resolve())
+accountFile = ""
+with open("currentLogin.csv", "r", newline = "") as csvfile:
+    reader = csv.reader(csvfile)
+    for line in reader:
+        accountFile = line[0]
+os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile))
+if not os.path.exists("Semesters"):
+    os.makedirs("Semesters")
+os.chdir(os.path.join(os.getcwd(), "Semesters"))
 
 window=tk.Tk()
 window.title("Main Page")
@@ -138,7 +147,7 @@ gpaLabel.grid(row=0,column=0, sticky = W)
 table = [[],[],[]]
 i = 0
 for i, semester in enumerate(sortedSemesters, start = 1):
-    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Semesters", semester))
+    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", semester))
     with open("semesterInfo.csv", "r", newline="") as csvfile:
         reader = csv.reader(csvfile)
         for line in reader:

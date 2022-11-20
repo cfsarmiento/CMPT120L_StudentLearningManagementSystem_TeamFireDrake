@@ -21,7 +21,13 @@ from tkinter import *
 import os
 import csv
 import pathlib
-os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Semesters"))
+os.chdir(pathlib.Path(__file__).parent.resolve())
+accountFile = ""
+with open("currentLogin.csv", "r", newline = "") as csvfile:
+    reader = csv.reader(csvfile)
+    for line in reader:
+        accountFile = line[0]
+os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters"))
 
 # Window
 new_semester = tk.Tk()
@@ -34,7 +40,7 @@ def CreateSemester():
     session = entrySessionYear.get() # session must either be "fall", "winter", "spring", "summer"  -  not case sensative
     if not os.path.exists(f"Semester_{year}_{session}"):
         os.makedirs(f"Semester_{year}_{session}")
-    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Semesters", f"Semester_{year}_{session}"))
+    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", f"Semester_{year}_{session}"))
     with open("semesterInfo.csv", "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["Year: " + year, "Session: " + session])

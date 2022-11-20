@@ -16,24 +16,39 @@ from tkinter import *
 import os
 import csv
 import pathlib
-os.chdir(pathlib.Path(__file__).parent.resolve())
+os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts"))
 window=tk.Tk()
 window.configure(bg='grey')
 window.title('Login')
-window.geometry('375x160')
+window.geometry('400x160')
 
 def Login():
     username = usernameEntry.get()
     password = passwordEntry.get()
-    with open("account.csv", "r", newline = "") as csvfile:
-        reader = csv.reader(csvfile)
-        for line in reader:
-            if (username == line[0] and password == line[1]):
-                window.destroy()
-                import mainPage
-            else:
-                errorLabel = tk.Label(window, text = "Username or password incorrect", fg = 'black')
-                errorLabel.grid(column = 2, row = 1)
+    loginFound = False
+    accountFile = ""
+    for path in os.listdir(os.getcwd()):
+        if os.path.isdir(os.path.join(os.getcwd(), path)):
+            os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", path))
+            with open("loginInfo.csv", "r", newline = "") as csvfile:
+                reader = csv.reader(csvfile)
+                for line in reader:
+                    if (username == line[0] and password == line[1]):
+                        loginFound = True
+                        accountFile = path
+                        break
+        if (loginFound):
+            break
+    if (loginFound):
+        os.chdir(pathlib.Path(__file__).parent.resolve())
+        with open("currentLogin.csv", "w", newline = "") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([accountFile])
+        window.destroy()
+        import mainPage
+    else:
+        errorLabel = tk.Label(window, text = "Username or password incorrect", fg = 'black')
+        errorLabel.grid(column = 2, row = 1)
 
 def CreateAccount():
     import createAccount
