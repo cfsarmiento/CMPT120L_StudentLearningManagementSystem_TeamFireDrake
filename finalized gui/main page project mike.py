@@ -1,3 +1,9 @@
+'''
+Authors: Michael McMahon and Gabrielle Knapp
+Title: Main Page
+Goal: Print out a main page and to create buttons that direct to other pages
+OR: Use tkinter for GUI
+'''
 import tkinter as tk
 from tkinter import *
 window=tk.Tk()
