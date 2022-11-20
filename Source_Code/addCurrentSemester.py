@@ -26,15 +26,15 @@ os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Semesters"))
 # Window
 new_semester = tk.Tk()
 new_semester.title('Add Current Semester') # title
-new_semester.geometry('250x150')  # window dimensions
+new_semester.geometry('300x150')  # window dimensions
 new_semester.configure(bg = 'grey')  # color
 
 def CreateSemester():
-    year = entryNewYear.get()
-    session = entrySessionYear.get()
-    if not os.path.exists(f"Semester{year + session}"):
-        os.makedirs(f"Semester{year + session}")
-    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Semesters", f"Semester{year + session}"))
+    year = entryNewYear.get() # year must be an integer
+    session = entrySessionYear.get() # session must either be "fall", "winter", "spring", "summer"  -  not case sensative
+    if not os.path.exists(f"Semester_{year}_{session}"):
+        os.makedirs(f"Semester_{year}_{session}")
+    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Semesters", f"Semester_{year}_{session}"))
     with open("semesterInfo.csv", "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["Year: " + year, "Session: " + session])
