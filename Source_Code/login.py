@@ -20,7 +20,7 @@ os.chdir(pathlib.Path(__file__).parent.resolve())
 window=tk.Tk()
 window.configure(bg='grey')
 window.title('Login')
-window.geometry('375x150')
+window.geometry('375x160')
 
 def Login():
     username = usernameEntry.get()
@@ -29,7 +29,8 @@ def Login():
         reader = csv.reader(csvfile)
         for line in reader:
             if (username == line[0] and password == line[1]):
-                import mainPage
+                window.destroy()
+                import mainPageProject
             else:
                 errorLabel = tk.Label(window, text = "Username or password incorrect", fg = 'black')
                 errorLabel.grid(column = 2, row = 1)
