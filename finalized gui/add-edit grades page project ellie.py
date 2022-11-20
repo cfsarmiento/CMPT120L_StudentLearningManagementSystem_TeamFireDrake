@@ -1,3 +1,13 @@
+'''
+Title: Add/Edit Grades
+Window: Add/Edit Grades Window
+Author: Gabrielle Knapp
+Class: CMPT120L
+Professor: Reza Sadeghi
+Goal: Allow users to input grades they wish to add or change to the system
+Widgets: labels, textfields, and buttons
+Other Requirements: TKInter for Interface Design.
+'''
 from tkinter import *
 window=Tk()
 window.configure(bg='grey')
