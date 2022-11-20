@@ -30,6 +30,7 @@ def AddPreviousSemester():
 
 def AdjustSemester():
     #import {file name where you pick between add/drop/edit class}
+    #window.destroy()
     pass
 
 frame1=tk.Frame(window,bg="Gray",highlightbackground="White",highlightthickness=1,width=100,height=100)
@@ -117,11 +118,11 @@ for i in range(1,count):    # this will get the number of classes in the most re
 frame4=tk.Frame(window,bg="Gray",highlightbackground="White",highlightthickness=1,width=500,height=100)
 frame4.grid(row=1,column=1)
 #textBox1=Text(frame4, bg="Gray", fg="White").grid(row=1, column=0)
-yearFrame = tk.Frame(frame4, bg = "Gray", width = 166, height = 300, padx = 50)
+yearFrame = tk.Frame(frame4, bg = "Gray", width = 166, height = 300, padx = 30)
 yearFrame.grid(row=0,column=0)
-semesterFrame = tk.Frame(frame4, bg = "Gray", width = 166, height = 300, padx = 50)
+semesterFrame = tk.Frame(frame4, bg = "Gray", width = 166, height = 300, padx = 30)
 semesterFrame.grid(row=0,column=1)
-gpaFrame = tk.Frame(frame4, bg = "Gray", width = 166, height = 300, padx = 50)
+gpaFrame = tk.Frame(frame4, bg = "Gray", width = 166, height = 300, padx = 30)
 gpaFrame.grid(row=0,column=2)
 
 yearLabel = tk.Label(yearFrame, bg = "Gray", fg = "White", text = "Year:", font = 'Helvetica 12 bold')
@@ -141,9 +142,9 @@ for i, semester in enumerate(sortedSemesters, start = 1):
     with open("semesterInfo.csv", "r", newline="") as csvfile:
         reader = csv.reader(csvfile)
         for line in reader:
-            table[0].append(tk.Label(yearFrame, bg = "Gray", fg = "White", text = line[0], font = 'Helvetica 12 bold').grid(row=i,column=0, sticky = W))
-            table[1].append(tk.Label(semesterFrame, bg = "Gray", fg = "White", text = line[1], font = 'Helvetica 12 bold').grid(row=i,column=0, sticky = W))
-            table[2].append(tk.Label(gpaFrame, bg = "Gray", fg = "White", text = line[2], font = 'Helvetica 12 bold').grid(row=i,column=0, sticky = W))
+            table[0].append(tk.Label(yearFrame, bg = "Gray", fg = "White", text = line[0][line[0].index(" ")+1:], font = 'Helvetica 12 bold').grid(row=i,column=0, sticky = W))
+            table[1].append(tk.Label(semesterFrame, bg = "Gray", fg = "White", text = line[1][line[1].index(" ")+1:], font = 'Helvetica 12 bold').grid(row=i,column=0, sticky = W))
+            table[2].append(tk.Label(gpaFrame, bg = "Gray", fg = "White", text = line[2][line[2].index(" ")+1:], font = 'Helvetica 12 bold').grid(row=i,column=0, sticky = W))
 
 frame5=tk.Frame(window,bg="Gray", width=500,height=300)
 frame5.grid(row=1, column=2)
