@@ -63,6 +63,7 @@ def ADD_ASSIGNMENT(course):
                 writer = csv.writer(csvfile)
                 writer.writerow([name, grade, weight])
             addLabel.configure(text = "Assignment added: " + name)
+            # it also needs to update the gdp
         except:
             addLabel.configure(text = "Could not add assignment: " + name)
     

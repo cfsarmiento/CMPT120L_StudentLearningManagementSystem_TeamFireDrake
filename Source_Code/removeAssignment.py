@@ -76,6 +76,7 @@ def REMOVE_ASSIGNMENT(course):
                 writer = csv.writer(csvfile)
                 writer.writerows(courseFile)
             assignmentLabel.configure(text = "Assignment removed: " + searchName)
+            # it also needs to update the gdp
         except:
             assignmentLabel.configure(text = "Could not remove assignment: " + searchName)
 

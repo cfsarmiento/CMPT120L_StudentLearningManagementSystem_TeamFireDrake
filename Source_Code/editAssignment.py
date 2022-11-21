@@ -81,6 +81,7 @@ def EDIT_ASSIGNMENT(course):
                 writer = csv.writer(csvfile)
                 writer.writerows(courseFile)
             assignmentLabel.configure(text = "Assignment saved: " + newName)
+            # it also needs to update the gdp
         except:
             assignmentLabel.configure(text = "Could not save assignment: " + newName)
 
