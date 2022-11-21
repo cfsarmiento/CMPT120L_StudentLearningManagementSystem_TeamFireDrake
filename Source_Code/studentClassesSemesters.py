@@ -136,7 +136,7 @@ semesters = {  # Keeps track of semester, by year
 }
 
 class studentSemester(studentClasses):
-'''Class to Save Classes to Semesters'''
+    '''Class to Save Classes to Semesters'''
     def __init(self, abrv_level, year, session):
         __init__(self, abrv_level)
         self.year = year
