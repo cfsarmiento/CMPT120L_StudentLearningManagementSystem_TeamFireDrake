@@ -103,9 +103,27 @@ def CLASS_MANAGER(course):
         window.destroy()
         import mainPage
         mainPage.MAIN_PAGE()
+    
+    def AddAssignment():
+        pass
+
+    def EditAssignment():
+        pass
+
+    def RemoveAssignment():
+        pass
 
     backButton = tk.Button(window,text = 'Back',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = Back)
     backButton.grid(row = 0, column = 4)
+
+    addAssignment = tk.Button(window,text = 'Add Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = AddAssignment)
+    addAssignment.grid(row = 1, column = 4)
+
+    editAssignment = tk.Button(window,text = 'Edit Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = EditAssignment)
+    editAssignment.grid(row = 2, column = 4)
+
+    removeAssignment = tk.Button(window,text = 'Remove Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = RemoveAssignment)
+    removeAssignment.grid(row = 3, column = 4)
 
     #Add a text in Canvas
     canvas.create_text(80,25, text="Assignment Type", fill="white", font=('Helvetica 12 bold'))

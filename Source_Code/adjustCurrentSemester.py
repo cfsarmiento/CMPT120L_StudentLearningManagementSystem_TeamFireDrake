@@ -25,12 +25,12 @@ def ADJUST_CURRENT_SEMESTER():
         window.destroy()
         import dropClass
         dropClass.DROP_WITHDRAWL()
-
+    '''
     def EditClass():
         window.destroy()
         import add_edit_grades
         add_edit_grades.ADD_EDIT_GRADES()
-
+    '''
     def Back():
         window.destroy()
         import mainPage
@@ -45,7 +45,7 @@ def ADJUST_CURRENT_SEMESTER():
     #Buttons
     btn1=tk.Button(frame1,text = "Add Class",bg = 'grey',fg = 'white',font = 'Helvetica 12 bold', command=AddClass).grid(row = 1, column = 1)
     btn2=tk.Button(frame1,text = "Remove Class",bg = 'grey',fg = 'white',font = 'Helvetica 12 bold', command=RemoveClass).grid(row = 2, column = 1)
-    btn3=tk.Button(frame1,text = "Add/Edit Class Grade",bg = 'grey',fg = 'white',font = 'Helvetica 12 bold', command=EditClass).grid(row = 3, column = 1)
+    #btn3=tk.Button(frame1,text = "Add/Edit Class Grade",bg = 'grey',fg = 'white',font = 'Helvetica 12 bold', command=EditClass).grid(row = 3, column = 1)
     backButton = tk.Button(frame1,text = 'Back',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = Back)
     backButton.grid(row = 4, column = 1)
 
