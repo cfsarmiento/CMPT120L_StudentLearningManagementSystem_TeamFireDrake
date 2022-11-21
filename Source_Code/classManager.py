@@ -71,7 +71,6 @@ def CLASS_MANAGER(course):
     # info should look something like this as an example
     # ["Course: CMPT_120","Credits: 4","Homework: 20","Test: 40","Project: 40","Quiz: ","Essay: "]
 
-
     window=Tk()
     window.title('Class Manager')
     window.geometry('1000x300')
@@ -105,12 +104,21 @@ def CLASS_MANAGER(course):
         mainPage.MAIN_PAGE()
     
     def AddAssignment():
+        #window.destroy()
+        #import {addAssignment}
+        #{addAssignment}.{ADD_ASSIGNMENT}()
         pass
 
     def EditAssignment():
+        #window.destroy()
+        #import {editAssignment}
+        #{editAssignment}.{EDIT_ASSIGNMENT}()
         pass
 
     def RemoveAssignment():
+        #window.destroy()
+        #import {removeAssignment}
+        #{removeAssignment}.{REMOVE_ASSIGNMENT}()
         pass
 
     backButton = tk.Button(window,text = 'Back',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = Back)
