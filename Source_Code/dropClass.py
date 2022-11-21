@@ -52,9 +52,9 @@ def DROP_WITHDRAWL():
     os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile))
     
     def Drop(file, index):
-        os.remove(file)
-        print(len(classButtons))
+        print(file)
         print(index)
+        os.remove(file)
         classButtons[index].destroy()
         i = 0
         for i, button in enumerate(classButtons, start = index):
@@ -88,7 +88,7 @@ def DROP_WITHDRAWL():
     selectClassLabel.grid(row = 0, column = 5)
 
     classButtons = list[tk.Button]()
-    for i, file in enumerate(os.listdir(os.getcwd())):
+    for i, file in enumerate(os.listdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile))):
         if ("course" in file):
             course = file[file.index("e")+1:file.index(".")]
             classButtons.append(tk.Button(classSelectionFrame,bg="grey",fg="white",text="Drop "+course,font='Helvetica 12 bold', command=lambda: Drop(file, i)).grid(row = i, column = 1))

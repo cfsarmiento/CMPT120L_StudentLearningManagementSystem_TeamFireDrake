@@ -64,6 +64,7 @@ def ADD_ASSIGNMENT(course):
                 writer.writerow([name, grade, weight])
             addLabel.configure(text = "Assignment added: " + name)
             # it also needs to update the gpa
+            # UpdateGrades()
         except:
             addLabel.configure(text = "Could not add assignment: " + name)
     
