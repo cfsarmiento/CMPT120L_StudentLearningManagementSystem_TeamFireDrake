@@ -48,7 +48,7 @@ def CLASS_MANAGER(course):
                     mostRecentSemesterFile = semester
     os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile))
 
-    # iterate through each course in the semester and get the info from it
+    # get info from the course
     info = ["Course: ","Credits: ","Homework: ","Test: ","Project: ","Quiz: ","Essay: "]
     with open("course" + course + ".csv", "r", newline="") as csvfile:
         reader = csv.reader(csvfile)
@@ -103,34 +103,31 @@ def CLASS_MANAGER(course):
         import mainPage
         mainPage.MAIN_PAGE()
     
-    def AddAssignment():
-        #window.destroy()
-        #import {addAssignment}
-        #{addAssignment}.{ADD_ASSIGNMENT}()
-        pass
+    def AddAssignment(course):
+        window.destroy()
+        import addAssignment
+        addAssignment.ADD_ASSIGNMENT(course)
 
-    def EditAssignment():
-        #window.destroy()
-        #import {editAssignment}
-        #{editAssignment}.{EDIT_ASSIGNMENT}()
-        pass
+    def EditAssignment(course):
+        window.destroy()
+        import editAssignment
+        editAssignment.EDIT_ASSIGNMENT(course)
 
-    def RemoveAssignment():
-        #window.destroy()
-        #import {removeAssignment}
-        #{removeAssignment}.{REMOVE_ASSIGNMENT}()
-        pass
+    def RemoveAssignment(course):
+        window.destroy()
+        import removeAssignment
+        removeAssignment.REMOVE_ASSIGNMENT(course)
 
     backButton = tk.Button(window,text = 'Back',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = Back)
     backButton.grid(row = 0, column = 4)
 
-    addAssignment = tk.Button(window,text = 'Add Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = AddAssignment)
+    addAssignment = tk.Button(window,text = 'Add Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = lambda: AddAssignment(course))
     addAssignment.grid(row = 1, column = 4)
 
-    editAssignment = tk.Button(window,text = 'Edit Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = EditAssignment)
+    editAssignment = tk.Button(window,text = 'Edit Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = lambda: EditAssignment(course))
     editAssignment.grid(row = 2, column = 4)
 
-    removeAssignment = tk.Button(window,text = 'Remove Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = RemoveAssignment)
+    removeAssignment = tk.Button(window,text = 'Remove Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = lambda: RemoveAssignment(course))
     removeAssignment.grid(row = 3, column = 4)
 
     #Add a text in Canvas
