@@ -31,7 +31,7 @@ def CREATE_ACCOUNT():
         accountFolders = list[int]()
         usernameExists = False
         for account in os.listdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts")):
-            if os.path.isdir(os.path.join(os.getcwd(), account)):
+            if os.path.isdir(os.path.join(os.getcwd(), account) and account[0:7] == "Account"):
                 os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", account))
                 with open("loginInfo.csv", "r", newline="") as csvfile:
                     reader = csv.reader(csvfile)
