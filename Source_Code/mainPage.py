@@ -128,11 +128,6 @@ def MAIN_PAGE():
             elif (year > sortedYear):
                 sortedSemesters.append(semester)
                 break
-    count = -0
-    if (mostRecentSemesterFile != ""):
-        for path in os.listdir(os.path.join(os.getcwd(), mostRecentSemesterFile)):
-            if os.path.isfile(os.path.join(os.getcwd(), mostRecentSemesterFile, path)):
-                count += 1
 
     for i, file in enumerate(os.listdir(os.path.join(os.getcwd(), mostRecentSemesterFile)), start = 1):
         if (os.path.isfile(os.path.join(os.getcwd(), mostRecentSemesterFile, file)) and file != "semesterInfo.csv"):

@@ -114,11 +114,8 @@ def CLASS_MANAGER(course):
     canvas2.create_text(25,25, text="Grade", fill="white", font=('Helvetica 12 bold'))
     canvas2.grid(row=0, column=1)
 
-    canvas3.create_text(50,25, text="Due Date", fill="white", font=('Helvetica 12 bold'))
-    canvas3.grid(row=0, column=2)
-
     canvas4.create_text(30,25, text="Weight", fill="white", font=('Helvetica 12 bold'))
-    canvas4.grid(row=0, column=3)
+    canvas4.grid(row=0, column=2)
 
     canvas5.create_text(85,25, text="Assignment Type #1", fill="white", font=('Helvetica 12 bold'))
     canvas5.grid(row=1, column=0)
@@ -144,28 +141,16 @@ def CLASS_MANAGER(course):
     canvas12.create_text(35,25, text="Grade #4", fill="white", font=('Helvetica 12 bold'))
     canvas12.grid(row=4, column=1)
 
-    canvas13.create_text(55,25, text="Due Date #1", fill="white", font=('Helvetica 12 bold'))
-    canvas13.grid(row=1, column=2)
-
-    canvas14.create_text(55,25, text="Due Date #2", fill="white", font=('Helvetica 12 bold'))
-    canvas14.grid(row=2, column=2)
-
-    canvas15.create_text(55,25, text="Due Date #3", fill="white", font=('Helvetica 12 bold'))
-    canvas15.grid(row=3, column=2)
-
-    canvas16.create_text(55,25, text="Due Date #4", fill="white", font=('Helvetica 12 bold'))
-    canvas16.grid(row=4, column=2)
-
     canvas17.create_text(40,25, text="Weight #1", fill="white", font=('Helvetica 12 bold'))
-    canvas17.grid(row=1, column=3)
+    canvas17.grid(row=1, column=2)
 
     canvas18.create_text(40,25, text="Weight #2", fill="white", font=('Helvetica 12 bold'))
-    canvas18.grid(row=2, column=3)
+    canvas18.grid(row=2, column=2)
 
     canvas19.create_text(40,25, text="Weight #3", fill="white", font=('Helvetica 12 bold'))
-    canvas19.grid(row=3, column=3)
+    canvas19.grid(row=3, column=2)
 
     canvas20.create_text(40,25, text="Weight #4", fill="white", font=('Helvetica 12 bold'))
-    canvas20.grid(row=4, column=3)
+    canvas20.grid(row=4, column=2)
 
     window.mainloop()
