@@ -28,8 +28,8 @@ def LOGIN():
         password = passwordEntry.get()
         loginFound = False
         accountFile = ""
-        for path in os.listdir(os.getcwd()):
-            if os.path.isdir(os.path.join(os.getcwd(), path)):
+        for path in os.listdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts")):
+            if os.path.isdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", path)):
                 os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", path))
                 with open("loginInfo.csv", "r", newline = "") as csvfile:
                     reader = csv.reader(csvfile)
