@@ -51,26 +51,38 @@ def EDIT_ASSIGNMENT(course):
 
     window=tk.Tk()
     window.title('Edit Assignment')
-    window.geometry("300x250")
+    window.geometry("400x250")
     window.configure(bg='grey')
 
     def Search():
-        searchName = nameEntry.get()
-        '''
-        #search through csv file for matching name
-        if found:
-            name
-            grade
-            weight
-            assignmentLabel.configure(text = f"Assignment Title: {name}, Assignment Grade: {grade}, Assignment Weight: {weight}")
-        '''
-        pass
+        try:
+            searchName = nameEntry.get()
+            with open("course"+course+".csv", "r", newline="") as csvfile:
+                reader = csv.reader(csvfile)
+            assignmentLabel.configure(text = "Assignment Found: " + searchName)
+        except:
+            assignmentLabel.configure(text = "Could not find assignment: " + searchName)
 
-    def Save(course):
-        # save assignment info in csv file
-        window.destroy()
-        import classManager
-        classManager.CLASS_MANAGER(course)
+    def Save():
+        try:
+            searchName = nameEntry.get()
+            newName = newNameEntry.get()
+            newGrade = newGradeEntry.get()
+            newWeight = newWeightEntry.get()
+            courseFile = []
+            with open("course"+course+".csv", "r", newline="") as csvfile:
+                reader = csv.reader(csvfile)
+                for line in reader:
+                    if (line[0] == searchName):
+                        courseFile.append([newName, newGrade, newWeight])
+                    else:
+                        courseFile.append(line)
+            with open("course"+course+".csv", "w", newline="") as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerows(courseFile)
+            assignmentLabel.configure(text = "Assignment saved: " + newName)
+        except:
+            assignmentLabel.configure(text = "Could not save assignment: " + newName)
 
     def Back(course):
         window.destroy()
@@ -103,10 +115,10 @@ def EDIT_ASSIGNMENT(course):
     newWeightEntry = tk.Entry(window)
     newWeightEntry.grid(row = 4, column = 1)
 
-    saveButton = tk.Button(window, text="Save", bg='grey', fg='white',font=("Helvetica 10 bold"), command = lambda: Save(course))
+    saveButton = tk.Button(window, text="Save", bg='grey', fg='white',font=("Helvetica 10 bold"), command = Save)
     saveButton.grid(row = 5, column = 0)
 
     backButton = tk.Button(window, text="Back", bg='grey', fg='white',font=("Helvetica 10 bold"), command = lambda: Back(course))
-    backButton.grid(row = 5, column = 0)
+    backButton.grid(row = 6, column = 0)
 
     window.mainloop()

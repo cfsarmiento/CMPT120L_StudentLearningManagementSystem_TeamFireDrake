@@ -51,35 +51,33 @@ def REMOVE_ASSIGNMENT(course):
 
     window=tk.Tk()
     window.title('Remove Assignment')
-    window.geometry("300x250")
+    window.geometry("400x250")
     window.configure(bg='grey')
 
     def Search():
-        searchName = nameEntry.get()
-        '''
-        #search through csv file for matching name
-        if found:
-            name
-            grade
-            weight
-            assignmentLabel.configure(text = f"Assignment Title: {name}, Assignment Grade: {grade}, Assignment Weight: {weight}")
-        else:
-            assignmentLabel.configure(text = "Assignment not found")
-        '''
-        pass
+        try:
+            searchName = nameEntry.get()
+            with open("course"+course+".csv", "r", newline="") as csvfile:
+                reader = csv.reader(csvfile)
+            assignmentLabel.configure(text = "Assignment Found: " + searchName)
+        except:
+            assignmentLabel.configure(text = "Could not find assignment: " + searchName)
 
     def Remove():
-        searchName = nameEntry.get()
-        '''
-        #search through csv file for matching name
-        if found:
-            loop through csv and store contents in a list
-            loop through that list and remove the specified assignment
-            loop through the csv file and write the list back into it, overwriting everything
-        else:
-            assignmentLabel.configure(text = "Cannot remove assignment that doesn't exist")
-        '''
-        pass
+        try:
+            searchName = nameEntry.get()
+            courseFile = []
+            with open("course"+course+".csv", "r", newline="") as csvfile:
+                reader = csv.reader(csvfile)
+                for line in reader:
+                    if (line[0] != searchName):
+                        courseFile.append(line)
+            with open("course"+course+".csv", "w", newline="") as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerows(courseFile)
+            assignmentLabel.configure(text = "Assignment removed: " + searchName)
+        except:
+            assignmentLabel.configure(text = "Could not remove assignment: " + searchName)
 
     def Back(course):
         window.destroy()
@@ -101,6 +99,6 @@ def REMOVE_ASSIGNMENT(course):
     removeButton.grid(row = 5, column = 0)
 
     backButton = tk.Button(window, text="Back", bg='grey', fg='white',font=("Helvetica 10 bold"), command = lambda: Back(course))
-    backButton.grid(row = 5, column = 0)
+    backButton.grid(row = 6, column = 0)
 
     window.mainloop()

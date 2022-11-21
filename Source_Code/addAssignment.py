@@ -54,11 +54,17 @@ def ADD_ASSIGNMENT(course):
     window.geometry("300x250")
     window.configure(bg='grey')
 
-    def Add(course):
-        # add assignment info to csv file
-        window.destroy()
-        import classManager
-        classManager.CLASS_MANAGER(course)
+    def Add():
+        try:
+            name = nameEntry.get()
+            grade = gradeEntry.get()
+            weight = weightEntry.get()
+            with open("course"+course+".csv", "a", newline="") as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow([name, grade, weight])
+            addLabel.configure(text = "Assignment added: " + name)
+        except:
+            addLabel.configure(text = "Could not add assignment: " + name)
     
     def Back(course):
         window.destroy()
@@ -80,10 +86,13 @@ def ADD_ASSIGNMENT(course):
     weightEntry = tk.Entry(window)
     weightEntry.grid(row = 2, column = 1)
 
-    addButton = tk.Button(window, text="Add", bg='grey', fg='white',font=("Helvetica 10 bold"), command = lambda: Add(course))
+    addButton = tk.Button(window, text="Add", bg='grey', fg='white',font=("Helvetica 10 bold"), command = Add)
     addButton.grid(row = 3, column = 0)
 
+    addLabel = tk.Label(window, text="", bg='grey', fg='white', font=("Helvetica 12 bold"))
+    addLabel.grid(row = 4, column = 0)
+
     backButton = tk.Button(window, text="Back", bg='grey', fg='white',font=("Helvetica 10 bold"), command = lambda: Back(course))
-    backButton.grid(row = 4, column = 0)
+    backButton.grid(row = 5, column = 0)
 
     window.mainloop()
