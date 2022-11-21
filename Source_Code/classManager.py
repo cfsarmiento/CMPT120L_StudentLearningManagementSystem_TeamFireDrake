@@ -76,27 +76,8 @@ def CLASS_MANAGER(course):
     window.geometry('1000x300')
     window.configure(bg='grey')
 
-    #Create a canvas object
-    canvas=Canvas(window, width= 170, height= 50, bg="grey")
-    canvas2=Canvas(window, width= 70, height= 50, bg="grey")
-    canvas3=Canvas(window, width= 120, height= 50, bg="grey")
-    canvas4=Canvas(window, width= 85, height= 50, bg="grey")
-    canvas5=Canvas(window, width= 170, height= 50, bg="grey")
-    canvas6=Canvas(window, width= 170, height= 50, bg="grey")
-    canvas7=Canvas(window, width= 170, height= 50, bg="grey")
-    canvas8=Canvas(window, width= 170, height= 50, bg="grey")
-    canvas9=Canvas(window, width= 70, height= 50, bg="grey")
-    canvas10=Canvas(window, width= 70, height= 50, bg="grey")
-    canvas11=Canvas(window, width= 70, height= 50, bg="grey")
-    canvas12=Canvas(window, width= 70, height= 50, bg="grey")
-    canvas13=Canvas(window, width= 120, height= 50, bg="grey")
-    canvas14=Canvas(window, width= 120, height= 50, bg="grey")
-    canvas15=Canvas(window, width= 120, height= 50, bg="grey")
-    canvas16=Canvas(window, width= 120, height= 50, bg="grey")
-    canvas17=Canvas(window, width= 85, height= 50, bg="grey")
-    canvas18=Canvas(window, width= 85, height= 50, bg="grey")
-    canvas19=Canvas(window, width= 85, height= 50, bg="grey")
-    canvas20=Canvas(window, width= 85, height= 50, bg="grey")
+    leftFrame = tk.Frame(window).grid(column=0, row=0)
+    rightFrame = tk.Frame(window).grid(column=1, row=0)
 
     def Back():
         window.destroy()
@@ -118,62 +99,55 @@ def CLASS_MANAGER(course):
         import removeAssignment
         removeAssignment.REMOVE_ASSIGNMENT(course)
 
-    backButton = tk.Button(window,text = 'Back',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = Back)
-    backButton.grid(row = 0, column = 4)
+    backButton = tk.Button(rightFrame,text = 'Back',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = Back)
+    backButton.grid(row = 0, column = 0)
 
-    addAssignment = tk.Button(window,text = 'Add Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = lambda: AddAssignment(course))
-    addAssignment.grid(row = 1, column = 4)
+    addAssignment = tk.Button(rightFrame,text = 'Add Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = lambda: AddAssignment(course))
+    addAssignment.grid(row = 1, column = 0)
 
-    editAssignment = tk.Button(window,text = 'Edit Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = lambda: EditAssignment(course))
-    editAssignment.grid(row = 2, column = 4)
+    editAssignment = tk.Button(rightFrame,text = 'Edit Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = lambda: EditAssignment(course))
+    editAssignment.grid(row = 2, column = 0)
 
-    removeAssignment = tk.Button(window,text = 'Remove Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = lambda: RemoveAssignment(course))
-    removeAssignment.grid(row = 3, column = 4)
+    removeAssignment = tk.Button(rightFrame,text = 'Remove Assignment',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = lambda: RemoveAssignment(course))
+    removeAssignment.grid(row = 3, column = 0)
 
-    #Add a text in Canvas
-    canvas.create_text(80,25, text="Assignment Type", fill="white", font=('Helvetica 12 bold'))
-    canvas.grid(row=0,column=0)
+    assignments = []
+    with open("course"+course+".csv", "r", newline="") as csvfile:
+        reader = csv.reader(csvfile)
+        for i, line in enumerate(reader):
+            if (i == 0):
+                continue
+            assignments.append(line)
 
-    canvas2.create_text(25,25, text="Grade", fill="white", font=('Helvetica 12 bold'))
-    canvas2.grid(row=0, column=1)
+    headerTitleCanvas = Canvas(leftFrame, width= 170, height= 50, bg="grey")
+    headerTitleCanvas.create_text(80,25, text="Assignment Type", fill="white", font=('Helvetica 12 bold'))
+    headerTitleCanvas.grid(row=0,column=0)
 
-    canvas4.create_text(30,25, text="Weight", fill="white", font=('Helvetica 12 bold'))
-    canvas4.grid(row=0, column=2)
+    headerGradeCanvas = Canvas(leftFrame, width= 70, height= 50, bg="grey")
+    headerGradeCanvas.create_text(25,25, text="Grade", fill="white", font=('Helvetica 12 bold'))
+    headerGradeCanvas.grid(row=0,column=1)
 
-    canvas5.create_text(85,25, text="Assignment Type #1", fill="white", font=('Helvetica 12 bold'))
-    canvas5.grid(row=1, column=0)
+    headerWeightCanvas = Canvas(leftFrame, width= 120, height= 50, bg="grey")
+    headerWeightCanvas.create_text(30,25, text="Weight", fill="white", font=('Helvetica 12 bold'))
+    headerWeightCanvas.grid(row=0,column=2)
 
-    canvas6.create_text(85,25, text="Assignment Type #2", fill="white", font=('Helvetica 12 bold'))
-    canvas6.grid(row=2, column=0)
-
-    canvas7.create_text(85,25, text="Assignment Type #3", fill="white", font=('Helvetica 12 bold'))
-    canvas7.grid(row=3, column=0)
-
-    canvas8.create_text(85,25, text="Assignment Type #4", fill="white", font=('Helvetica 12 bold'))
-    canvas8.grid(row=4, column=0)
-
-    canvas9.create_text(35,25, text="Grade #1", fill="white", font=('Helvetica 12 bold'))
-    canvas9.grid(row=1, column=1)
-
-    canvas10.create_text(35,25, text="Grade #2", fill="white", font=('Helvetica 12 bold'))
-    canvas10.grid(row=2, column=1)
-
-    canvas11.create_text(35,25, text="Grade #3", fill="white", font=('Helvetica 12 bold'))
-    canvas11.grid(row=3, column=1)
-
-    canvas12.create_text(35,25, text="Grade #4", fill="white", font=('Helvetica 12 bold'))
-    canvas12.grid(row=4, column=1)
-
-    canvas17.create_text(40,25, text="Weight #1", fill="white", font=('Helvetica 12 bold'))
-    canvas17.grid(row=1, column=2)
-
-    canvas18.create_text(40,25, text="Weight #2", fill="white", font=('Helvetica 12 bold'))
-    canvas18.grid(row=2, column=2)
-
-    canvas19.create_text(40,25, text="Weight #3", fill="white", font=('Helvetica 12 bold'))
-    canvas19.grid(row=3, column=2)
-
-    canvas20.create_text(40,25, text="Weight #4", fill="white", font=('Helvetica 12 bold'))
-    canvas20.grid(row=4, column=2)
+    canvases = []
+    for rowIndex, assignment in enumerate(assignments):
+        for columnIndex in range(0,2):
+            canvas = None
+            match columnIndex:
+                case 0:
+                    canvas = Canvas(leftFrame, width= 170, height= 50, bg="grey")
+                    canvas.create_text(85,25, text=assignment[columnIndex], fill="white", font=('Helvetica 12 bold'))
+                    canvas.grid(row=rowIndex+1,column=columnIndex)
+                case 1:
+                    canvas = Canvas(leftFrame, width= 70, height= 50, bg="grey")
+                    canvas.create_text(35,25, text=assignment[columnIndex], fill="white", font=('Helvetica 12 bold'))
+                    canvas.grid(row=rowIndex+1,column=columnIndex)
+                case 2:
+                    canvas = Canvas(leftFrame, width= 85, height= 50, bg="grey")
+                    canvas.create_text(40,25, text=assignment[columnIndex], fill="white", font=('Helvetica 12 bold'))
+                    canvas.grid(row=rowIndex+1,column=columnIndex)
+            canvases.append(canvas)
 
     window.mainloop()

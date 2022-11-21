@@ -65,7 +65,6 @@ def MAIN_PAGE():
 
     frame2=tk.Frame(window,bg="Gray",width=500,height=140)
     frame2.grid(row=0,column=1)
-    label= tk.Label(bg="Gray", fg="White", text="Course Name:       Grade:       Status:       ", font='Helvetica 12 bold').grid(row=0,column=1)
     label= tk.Label(bg="Gray", fg="White", text="Semester GPA:    \nCummulative GPA:     ", font='Helvetica 12 bold').grid(row=0,column=2)
 
     frame3=tk.Frame(window,bg="Gray",width=249,height=249)
