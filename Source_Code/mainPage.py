@@ -161,7 +161,8 @@ def MAIN_PAGE():
     #first time setup
     frame6=tk.Frame(window,bg="Gray",highlightbackground="White",highlightthickness=1,width=500,height=150)
     frame6.grid(row=2,column=0)
-    ftsLabel = tk.Label(frame6, bg = 'grey', fg = 'White', text = 'First Time Setup Users:\n 1. Add Currest Semester Button\n2. Add Classes (Adjust Current Semester)\n3. Add Grades(Adjust Current Semester)\n4. Add Previous Semester GPA (if Applicable)',font = 'Helvetica 12 bold')
+    ftsLabel = tk.Label(frame6, bg = 'grey', fg = 'White', text = "First Time?\n\n1. Add Current Semester\n\t--> input info\n2. Adjust Current Semester\n\t--> Add Class\n\t\t--> input info\n\t-->Edit Class\n\t\t--> input info\n3. Add Previous Semester (if applicable)\n\t--> input info",font = 'Helvetica 12 bold', justify=LEFT)
+    # old text: 'First Time Setup Users:\n 1. Add Currest Semester Button\n2. Add Classes (Adjust Current Semester)\n3. Add Grades(Adjust Current Semester)\n4. Add Previous Semester GPA (if Applicable)'
     ftsLabel.grid(row=2,column=0,sticky = W)
 
     # iterates through the files and prints the year, session, and gpa into the GUI
