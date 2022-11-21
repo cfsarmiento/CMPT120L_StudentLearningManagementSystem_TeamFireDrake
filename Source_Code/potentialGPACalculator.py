@@ -11,7 +11,7 @@ def POTENTIAL_GPA_CALCULATOR():
     import tkinter as tk
     window=tk.Tk()
     window.title('Potential GPA Calculator')
-    window.geometry('570x350')
+    window.geometry('650x375')
     window.configure(bg='grey')
     gpa=0
     cla1=0
@@ -30,8 +30,8 @@ def POTENTIAL_GPA_CALCULATOR():
 
     def Back():
         window.destroy()
-        #import mainPage
-        return
+        import mainPage
+        mainPage.MAIN_PAGE()
 
     def calculate():
         numerator=0.0
