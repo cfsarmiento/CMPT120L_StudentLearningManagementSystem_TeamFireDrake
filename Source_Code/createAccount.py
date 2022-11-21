@@ -22,29 +22,48 @@ def CREATE_ACCOUNT():
     window=tk.Tk()
     window.configure(bg='grey')
     window.title('Create Account')
-    window.geometry('375x130')
+    window.geometry('600x150')
 
     def CreateAccount():
         username = usernameEntry.get()
         password = passwordEntry.get()
         confirm = confirmEntry.get()
         accountFolders = list[int]()
+        usernameExists = False
         for path in os.listdir(os.getcwd()):
             if os.path.isdir(os.path.join(os.getcwd(), path)):
+                os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", path))
+                with open("loginInfo.csv", "r", newline="") as csvfile:
+                    reader = csv.reader(csvfile)
+                    for line in reader:
+                        if (username == line[0]):
+                            usernameExists = True
+                            break
+                os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts"))
+                if usernameExists:
+                    break
                 pathNum = int(path[path.index("t")+1:])
                 if (len(accountFolders) == 0):
                     accountFolders.append(pathNum)
                 for folder in accountFolders:
                     if (pathNum > folder):
                         accountFolders.insert(accountFolders.index(folder)+1, pathNum)
+            if usernameExists:
+                break
         firstAvailableNum = len(accountFolders)
         for i, folder in enumerate(accountFolders):
+            if usernameExists:
+                break
             if (folder != i):
                 firstAvailableNum = i
                 break
-        os.makedirs(os.path.join(os.getcwd(), "Account" + str(firstAvailableNum)))
-        os.chdir(os.path.join(os.getcwd(), "Account" + str(firstAvailableNum)))
-        if (password == confirm):
+        if not usernameExists:
+            os.makedirs(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", "Account" + str(firstAvailableNum)))
+            os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", "Account" + str(firstAvailableNum)))
+        if usernameExists:
+            error1Label = tk.Label(window, text = "Username already exists", fg = 'white', bg='grey', font='Helvetica 12 bold')
+            error1Label.grid(column = 2, row = 1)
+        elif (password == confirm):
             with open("loginInfo.csv", "w", newline = "") as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerow([username, password])
@@ -52,8 +71,8 @@ def CREATE_ACCOUNT():
             import login
             login.LOGIN()
         else:
-            errorLabel = tk.Label(window, text = "Passwords don't match", fg = 'white', bg='grey', font='Helvetica 12 bold')
-            errorLabel.grid(column = 2, row = 2)
+            error2Label = tk.Label(window, text = "Passwords don't match", fg = 'white', bg='grey', font='Helvetica 12 bold')
+            error2Label.grid(column = 2, row = 2)
 
     usernameLabel=tk.Label(window, text = 'Set Username: ', fg = 'white', bg='grey', font='Helvetica 12 bold')
     usernameLabel.grid(column = 0, row = 0)

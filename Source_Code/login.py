@@ -21,7 +21,7 @@ def LOGIN():
     window=tk.Tk()
     window.configure(bg='grey')
     window.title('Login')
-    window.geometry('400x160')
+    window.geometry('500x160')
 
     def Login():
         username = usernameEntry.get()
