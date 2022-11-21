@@ -13,7 +13,7 @@ def ADJUST_CURRENT_SEMESTER():
     # Window
     window = tk.Tk()
     window.title('Adjust Current Semester')  # title for window
-    window.geometry('300x300')  # length x width
+    window.geometry('300x170')  # length x width
     window.configure(bg = 'grey')  # background color
 
     def AddClass():
