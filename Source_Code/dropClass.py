@@ -10,9 +10,64 @@ Other Requirements: TKInter for Interface Design.
 '''
 def DROP_WITHDRAWL():
     import tkinter as tk
+    #from tkinter import *
+    import os
+    import csv
+    import pathlib
+
+    # for determining the most recent semester
+    os.chdir(pathlib.Path(__file__).parent.resolve())
+    accountFile = ""
+    with open("currentLogin.csv", "r", newline = "") as csvfile:
+        reader = csv.reader(csvfile)
+        for line in reader:
+            accountFile = line[0]
+    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters"))
+    semesters = os.listdir(os.getcwd())
+    mostRecentSemesterFile = ""
+    mostRecentYear = 0
+    mostRecentSession = 0
+    for semester in semesters:
+        if os.path.isdir(os.path.join(os.getcwd(), semester)):
+            year = int(semester[semester.index("_")+1:semester.rindex("_")])
+            session = 0
+            match semester[semester.rindex("_")+1:].lower():
+                case "fall":
+                    session = 1
+                case "autumn":
+                    session = 1
+                case "winter":
+                    session = 2
+                case "spring":
+                    session = 3
+                case "summer":
+                    session = 4
+            if (year > mostRecentYear):
+                mostRecentYear = year
+                mostRecentSemesterFile = semester
+            elif (year == mostRecentYear):
+                if (session > mostRecentSession):
+                    mostRecentSession = session
+                    mostRecentSemesterFile = semester
+    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile))
+    
+    def Drop(file, index):
+        os.remove(file)
+        print(len(classButtons))
+        print(index)
+        classButtons[index].destroy()
+        i = 0
+        for i, button in enumerate(classButtons, start = index):
+            button.configure(row = i)
+
+    def Back():
+        drop_withdrawl.destroy()
+        import adjustCurrentSemester
+        adjustCurrentSemester.ADJUST_CURRENT_SEMESTER()
+
     # Window
     drop_withdrawl = tk.Tk()
-    drop_withdrawl.title('Drop/Withdrawl')  # title for window
+    drop_withdrawl.title('Drop')  # title for window
     drop_withdrawl.geometry('300x300')  # length x width
     drop_withdrawl.configure(bg = 'grey')  # background color
 
@@ -32,22 +87,14 @@ def DROP_WITHDRAWL():
                                 pady = 30)
     selectClassLabel.grid(row = 0, column = 5)
 
-    # Buttons for Classes
-    test_classes = ['DATA 300', 'CMPT 220L', 'MATH 280', 'ECON 103L'] # actual data from backend
-    count = 0
-    for c in test_classes:
-        tk.Button(classSelectionFrame,text = c,bg = 'grey',fg = 'white',font = 'Helvetica 12 bold').grid(row = count, column = 1)
-        count = count+1
-                
-    # Buttons for Dropping and Withdrawling
-    btnDrop = tk.Button(dropWithdrawlFrame, text = 'Drop', fg='white', bg='grey', font='Helvetica 12 bold')
-    btnDrop.grid(row = 0, column = 0)
+    classButtons = list[tk.Button]()
+    for i, file in enumerate(os.listdir(os.getcwd())):
+        if ("course" in file):
+            course = file[file.index("e")+1:file.index(".")]
+            classButtons.append(tk.Button(classSelectionFrame,bg="grey",fg="white",text="Drop "+course,font='Helvetica 12 bold', command=lambda: Drop(file, i)).grid(row = i, column = 1))
 
-    btnWithdrawl = tk.Button(dropWithdrawlFrame, text = 'Withdrawl', fg='white', bg='grey', font='Helvetica 12 bold')
-    btnWithdrawl.grid(row = 0, column = 1)
-
-    # Button to Apply Changes
-    btnApplyChanges = tk.Button(drop_withdrawl, text = 'Finalize', fg='white', bg='grey', font='Helvetica 12 bold')
-    btnApplyChanges.grid(row = 4, column = 9)
+    # Back Button
+    btnBack = tk.Button(drop_withdrawl, text = 'Back', fg='white', bg='grey', font='Helvetica 12 bold', command=Back)
+    btnBack.grid(row = 0, column = 0)
 
     drop_withdrawl.mainloop()

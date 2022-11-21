@@ -23,8 +23,8 @@ def ADJUST_CURRENT_SEMESTER():
 
     def RemoveClass():
         window.destroy()
-        import drop_withdraw
-        drop_withdraw.DROP_WITHDRAWL()
+        import dropClass
+        dropClass.DROP_WITHDRAWL()
 
     def EditClass():
         window.destroy()

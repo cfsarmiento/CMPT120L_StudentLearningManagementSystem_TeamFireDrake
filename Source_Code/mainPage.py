@@ -27,7 +27,7 @@ def MAIN_PAGE():
 
     window=tk.Tk()
     window.title("Main Page")
-    window.geometry("1200x550")
+    window.geometry("1200x650")
     window.config(bg="Gray")
 
     def AddCurrentSemester():
@@ -41,9 +41,13 @@ def MAIN_PAGE():
         addPreviousSemester.ADD_PREVIOUS_SEMESTER()
 
     def AdjustSemester():
-        window.destroy()
-        import adjustCurrentSemester
-        adjustCurrentSemester.ADJUST_CURRENT_SEMESTER()
+        if (len(os.listdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters"))) > 0):
+            window.destroy()
+            import adjustCurrentSemester
+            adjustCurrentSemester.ADJUST_CURRENT_SEMESTER()
+        else:
+            errorLabel = tk.Label(frame5, text = 'You must add a semester before you add a class', bg='grey', font='Helvetica 12 bold',fg = 'white')
+            errorLabel.grid(column=1,row=2)
 
     def PotentialGPA_Calculator():
         window.destroy()
