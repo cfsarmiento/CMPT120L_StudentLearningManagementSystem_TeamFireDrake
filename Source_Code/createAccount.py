@@ -30,9 +30,9 @@ def CREATE_ACCOUNT():
         confirm = confirmEntry.get()
         accountFolders = list[int]()
         usernameExists = False
-        for path in os.listdir(os.getcwd()):
-            if os.path.isdir(os.path.join(os.getcwd(), path)):
-                os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", path))
+        for account in os.listdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts")):
+            if os.path.isdir(os.path.join(os.getcwd(), account)):
+                os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", account))
                 with open("loginInfo.csv", "r", newline="") as csvfile:
                     reader = csv.reader(csvfile)
                     for line in reader:
@@ -40,30 +40,23 @@ def CREATE_ACCOUNT():
                             usernameExists = True
                             break
                 os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts"))
-                if usernameExists:
-                    break
-                pathNum = int(path[path.index("t")+1:])
+                accountNum = int(account[account.index("t")+1:])
                 if (len(accountFolders) == 0):
-                    accountFolders.append(pathNum)
-                for folder in accountFolders:
-                    if (pathNum > folder):
-                        accountFolders.insert(accountFolders.index(folder)+1, pathNum)
-            if usernameExists:
-                break
+                    accountFolders.append(accountNum)
+                for num in accountFolders:
+                    if (accountNum > num):
+                        accountFolders.insert(accountFolders.index(num)+1, accountNum)
         firstAvailableNum = len(accountFolders)
         for i, folder in enumerate(accountFolders):
-            if usernameExists:
-                break
             if (folder != i):
                 firstAvailableNum = i
                 break
-        if not usernameExists:
-            os.makedirs(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", "Account" + str(firstAvailableNum)))
-            os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", "Account" + str(firstAvailableNum)))
         if usernameExists:
             error1Label = tk.Label(window, text = "Username already exists", fg = 'white', bg='grey', font='Helvetica 12 bold')
             error1Label.grid(column = 2, row = 1)
         elif (password == confirm):
+            os.makedirs(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", "Account" + str(firstAvailableNum)))
+            os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", "Account" + str(firstAvailableNum)))
             with open("loginInfo.csv", "w", newline = "") as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerow([username, password])
