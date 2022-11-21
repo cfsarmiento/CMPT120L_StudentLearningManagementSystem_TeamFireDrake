@@ -35,7 +35,7 @@ def ADD_PREVIOUS_SEMESTER():
     # Window
     semester_settings = tk.Tk()
     semester_settings.title('Add Previous Semester')  # title for window
-    semester_settings.geometry('300x150')  # window size
+    semester_settings.geometry('300x175')  # window size
     semester_settings.configure(bg ='grey')  # color
 
     def Finalize():
