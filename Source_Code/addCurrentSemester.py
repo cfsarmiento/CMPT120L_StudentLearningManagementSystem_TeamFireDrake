@@ -33,21 +33,37 @@ def ADD_CURRENT_SEMESTER():
     # Window
     new_semester = tk.Tk()
     new_semester.title('Add Current Semester') # title
-    new_semester.geometry('300x175')  # window dimensions
+    new_semester.geometry('400x300')  # window dimensions
     new_semester.configure(bg = 'grey')  # color
 
     def CreateSemester():
         year = entryNewYear.get() # year must be an integer
         session = entrySessionYear.get() # session must either be "fall", "winter", "spring", "summer"  -  not case sensative
-        if not os.path.exists(f"Semester_{year}_{session}"):
-            os.makedirs(f"Semester_{year}_{session}")
-        os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", f"Semester_{year}_{session}"))
-        with open("semesterInfo.csv", "w", newline="") as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(["Year: " + year, "Session: " + session, "GPA: "])
-        new_semester.destroy()
-        import mainPage
-        mainPage.MAIN_PAGE()
+        season = 0
+        match session.lower():
+            case "fall":
+                season = 1
+            case "autumn":  # just in case anyone writes this
+                season = 1
+            case "winter":
+                season = 2
+            case "spring":
+                season = 3
+            case "summer":
+                season = 4
+        if season != 0:
+            if not os.path.exists(f"Semester_{year}_{session}"):
+                os.makedirs(f"Semester_{year}_{session}")
+            os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", f"Semester_{year}_{session}"))
+            with open("semesterInfo.csv", "w", newline="") as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(["Year: " + year, "Session: " + session, "GPA: "])
+            new_semester.destroy()
+            import mainPage
+            mainPage.MAIN_PAGE()
+        else:
+            createSemesterLabel = tk.Label(newSemesterFrame, text = "The session must be entered as\nFall or Autumn\nWinter\nSpring\nSummer", bg = 'grey', fg = 'white', font = 'Helvetica 12 bold', padx = 20, pady = 10)
+            createSemesterLabel.grid(row = 3, column = 1)
 
     def Back():
         new_semester.destroy()
@@ -106,6 +122,6 @@ def ADD_CURRENT_SEMESTER():
     btnNewSemester.grid(row = 2, column = 1)
 
     backButton = tk.Button(newSemesterFrame,text = 'Back',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = Back)
-    backButton.grid(row = 3, column = 1)
+    backButton.grid(row = 4, column = 1)
 
     new_semester.mainloop()
