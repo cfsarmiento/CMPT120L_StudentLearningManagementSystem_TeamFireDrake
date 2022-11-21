@@ -75,4 +75,3 @@ def LOGIN():
     createAccountButton.grid(column = 1, row = 4)
 
     window.mainloop()
-LOGIN()
