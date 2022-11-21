@@ -47,7 +47,7 @@ def MAIN_PAGE():
             adjustCurrentSemester.ADJUST_CURRENT_SEMESTER()
         else:
             errorLabel = tk.Label(frame5, text = 'You must add a semester before you add a class', bg='grey', font='Helvetica 12 bold',fg = 'white')
-            errorLabel.grid(column=1,row=2)
+            errorLabel.grid(column=2,row=4)
 
     def PotentialGPA_Calculator():
         window.destroy()

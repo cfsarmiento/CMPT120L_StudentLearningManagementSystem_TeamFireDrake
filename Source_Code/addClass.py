@@ -103,42 +103,38 @@ def ADD_CLASS():
     def AddClass():
         # save class info to classes.csv
         # talk to Christian about format
-        if (len(os.listdir(os.getcwd())) > 0):
-            courseAbbr = courseAbbrEntry.get()
-            homework = homeworkEntry.get()
-            test = testEntry.get()
-            project = projectEntry.get()
-            quiz = quizEntry.get()
-            essay = essayEntry.get()
-            credits = 0
-            if (credit1Button["bg"] == "orange"):
-                credits = 1
-            elif (credit3Button["bg"] == "orange"):
-                credits = 3
-            elif (credit4Button["bg"] == "orange"):
-                credits = 4
-            types = []
-            if (homeworkButton["bg"] == "orange"):
-                types.append("Homework: " + str(homework))
-            if (testButton["bg"] == "orange"):
-                types.append("Test: " + str(test))
-            if (projectButton["bg"] == "orange"):
-                types.append("Project: " + str(project))
-            if (quizButton["bg"] == "orange"):
-                types.append("Quiz: " + str(quiz))
-            if (essayButton["bg"] == "orange"):
-                types.append("Essay: " + str(essay))
-            classInfo = ["Course: " + courseAbbr, "Credits: " + str(credits)]
-            classInfo.extend(types)
-            with open(f"course{courseAbbr}.csv", "w", newline = "") as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerow(classInfo)
-            window.destroy()
-            import mainPage
-            mainPage.MAIN_PAGE()
-        else:
-            errorLabel = tk.Label(bottomFrame, text = 'You must add a semester before you add a class', bg='grey', font='Helvetica 12 bold',fg = 'white')
-            errorLabel.grid(column=0,row=4)
+        courseAbbr = courseAbbrEntry.get()
+        homework = homeworkEntry.get()
+        test = testEntry.get()
+        project = projectEntry.get()
+        quiz = quizEntry.get()
+        essay = essayEntry.get()
+        credits = 0
+        if (credit1Button["bg"] == "orange"):
+            credits = 1
+        elif (credit3Button["bg"] == "orange"):
+            credits = 3
+        elif (credit4Button["bg"] == "orange"):
+            credits = 4
+        types = []
+        if (homeworkButton["bg"] == "orange"):
+            types.append("Homework: " + str(homework))
+        if (testButton["bg"] == "orange"):
+            types.append("Test: " + str(test))
+        if (projectButton["bg"] == "orange"):
+            types.append("Project: " + str(project))
+        if (quizButton["bg"] == "orange"):
+            types.append("Quiz: " + str(quiz))
+        if (essayButton["bg"] == "orange"):
+            types.append("Essay: " + str(essay))
+        classInfo = ["Course: " + courseAbbr, "Credits: " + str(credits)]
+        classInfo.extend(types)
+        with open(f"course{courseAbbr}.csv", "w", newline = "") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(classInfo)
+        window.destroy()
+        import mainPage
+        mainPage.MAIN_PAGE()
 
     def Back():
         window.destroy()
