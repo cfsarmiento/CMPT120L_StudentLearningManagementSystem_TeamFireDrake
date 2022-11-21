@@ -11,7 +11,15 @@ Other Requirements: TKInter for Interface Design.
 from tkinter import *
 def ADD_EDIT_GRADES():
     window=Tk()
+    window.title('Add/Edit Grades')
+    window.geometry("300x250")
     window.configure(bg='grey')
+
+    def Back():
+        window.destroy()
+        import mainPage
+        mainPage.MAIN_PAGE()
+
     btn1=Button(window, text="Finalize", bg='grey', fg='white',font=("Helvetica 10 bold"))
     btn1.place(x=230, y=175)
     lbl1=Label(window, text="Assignment Title: ", bg='grey', fg='white', font=("Helvetica 12 bold"))
@@ -28,6 +36,6 @@ def ADD_EDIT_GRADES():
     txtfld2.place(x=150, y=125)
     txtfld3=Entry(window, text="Add/Edit/Rename: ", bd=5)
     txtfld3.place(x=150, y=150)
-    window.title('Add/Edit Grades')
-    window.geometry("300x200+20+20")
+    btnBack=Button(window, text="Back", bg='grey', fg='white',font=("Helvetica 10 bold"), command=Back)
+    btnBack.place(x=230, y=210)
     window.mainloop()
