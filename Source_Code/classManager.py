@@ -6,8 +6,71 @@
 #Goal: Prints the classes, homework, weights, grades for the student
 #Other Requirements: TKInter for Interface Design.
 from tkinter import *
-def CLASS_MANAGER():
+def CLASS_MANAGER(course):
     import tkinter as tk
+    import os
+    import pathlib
+    import csv
+
+    # gets the directory of the current/most recent semester
+    os.chdir(pathlib.Path(__file__).parent.resolve())
+    accountFile = ""
+    with open("currentLogin.csv", "r", newline = "") as csvfile:
+        reader = csv.reader(csvfile)
+        for line in reader:
+            accountFile = line[0]
+    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters"))
+    semesters = os.listdir(os.getcwd())
+    mostRecentSemesterFile = ""
+    mostRecentYear = 0
+    mostRecentSession = 0
+    for semester in semesters:
+        if os.path.isdir(os.path.join(os.getcwd(), semester)):
+            year = int(semester[semester.index("_")+1:semester.rindex("_")])
+            session = 0
+            match semester[semester.rindex("_")+1:].lower():
+                case "fall":
+                    session = 1
+                case "autumn":
+                    session = 1
+                case "winter":
+                    session = 2
+                case "spring":
+                    session = 3
+                case "summer":
+                    session = 4
+            if (year > mostRecentYear):
+                mostRecentYear = year
+                mostRecentSemesterFile = semester
+            elif (year == mostRecentYear):
+                if (session > mostRecentSession):
+                    mostRecentSession = session
+                    mostRecentSemesterFile = semester
+    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile))
+
+    # iterate through each course in the semester and get the info from it
+    info = []
+    with open("course" + course + ".csv", "r", newline="") as csvfile:
+        reader = csv.reader(csvfile)
+        for line in reader:
+            app = ["Course: ","Credits: ","Homework: ","Test: ","Project: ","Quiz: ","Essay: "]
+            for i, row in enumerate(line):
+                if "Course: " in row:
+                    app[i] = row
+                elif "Credits: " in row:
+                    app[i] = row
+                elif "Homework: " in row:
+                    app[i] = row
+                elif "Test: " in row:
+                    app[i] = row
+                elif "Project: " in row:
+                    app[i] = row
+                elif "Quiz: " in row:
+                    app[i] = row
+                elif "Essay: " in row:
+                    app[i] = row
+            info.append(app)
+
 
     window=Tk()
     window.title('Class Manager')
@@ -36,6 +99,13 @@ def CLASS_MANAGER():
     canvas19=Canvas(window, width= 85, height= 50, bg="grey")
     canvas20=Canvas(window, width= 85, height= 50, bg="grey")
 
+    def Back():
+        window.destroy()
+        import mainPage
+        mainPage.MAIN_PAGE()
+
+    backButton = tk.Button(window,text = 'Back',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = Back)
+    backButton.grid(row = 0, column = 4)
 
     #Add a text in Canvas
     canvas.create_text(80,25, text="Assignment Type", fill="white", font=('Helvetica 12 bold'))

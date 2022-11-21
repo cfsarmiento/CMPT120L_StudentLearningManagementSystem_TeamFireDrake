@@ -53,7 +53,7 @@ def LOGIN():
             errorLabel.grid(column = 2, row = 1)
 
     def CreateAccount():
-        #window.destroy()
+        window.destroy()
         import createAccount
         createAccount.CREATE_ACCOUNT()
 

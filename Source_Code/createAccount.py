@@ -49,7 +49,8 @@ def CREATE_ACCOUNT():
                 writer = csv.writer(csvfile)
                 writer.writerow([username, password])
             window.destroy()
-            return
+            import login
+            login.LOGIN()
         else:
             errorLabel = tk.Label(window, text = "Passwords don't match", fg = 'white', bg='grey', font='Helvetica 12 bold')
             errorLabel.grid(column = 2, row = 2)

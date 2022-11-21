@@ -51,7 +51,9 @@ def MAIN_PAGE():
         potentialGPACalculator.POTENTIAL_GPA_CALCULATOR()
 
     def Class(course):
-        pass
+        window.destroy()
+        import classManager
+        classManager.CLASS_MANAGER(course)
         
     frame1=tk.Frame(window,bg="Gray",highlightbackground="White",highlightthickness=1,width=100,height=100)
     frame1.grid(row=0,column=0)
@@ -135,7 +137,7 @@ def MAIN_PAGE():
     for i, file in enumerate(os.listdir(os.path.join(os.getcwd(), mostRecentSemesterFile)), start = 1):
         if (os.path.isfile(os.path.join(os.getcwd(), mostRecentSemesterFile, file)) and file != "semesterInfo.csv"):
             course = file[file.index("e")+1:file.index(".")]
-            tk.Button(frame3,bg="Gray",fg="White",text=course,font='Helvetica 12 bold', command=Class(course)).grid(row=3+i,column=0,pady=5)
+            tk.Button(frame3,bg="Gray",fg="White",text=course+".csv",font='Helvetica 12 bold', command=lambda: Class(course)).grid(row=3+i,column=0,pady=5)
 
     frame4=tk.Frame(window,bg="Gray",highlightbackground="White",highlightthickness=1,width=500,height=100)
     frame4.grid(row=1,column=1)
