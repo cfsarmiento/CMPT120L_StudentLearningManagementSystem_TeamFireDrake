@@ -49,27 +49,27 @@ def CLASS_MANAGER(course):
     os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile))
 
     # iterate through each course in the semester and get the info from it
-    info = []
+    info = ["Course: ","Credits: ","Homework: ","Test: ","Project: ","Quiz: ","Essay: "]
     with open("course" + course + ".csv", "r", newline="") as csvfile:
         reader = csv.reader(csvfile)
         for line in reader:
-            app = ["Course: ","Credits: ","Homework: ","Test: ","Project: ","Quiz: ","Essay: "]
             for i, row in enumerate(line):
                 if "Course: " in row:
-                    app[i] = row
+                    info[i] = row
                 elif "Credits: " in row:
-                    app[i] = row
+                    info[i] = row
                 elif "Homework: " in row:
-                    app[i] = row
+                    info[i] = row
                 elif "Test: " in row:
-                    app[i] = row
+                    info[i] = row
                 elif "Project: " in row:
-                    app[i] = row
+                    info[i] = row
                 elif "Quiz: " in row:
-                    app[i] = row
+                    info[i] = row
                 elif "Essay: " in row:
-                    app[i] = row
-            info.append(app)
+                    info[i] = row
+    # info should look something like this as an example
+    # ["Course: CMPT_120","Credits: 4","Homework: 20","Test: 40","Project: 40","Quiz: ","Essay: "]
 
 
     window=Tk()
