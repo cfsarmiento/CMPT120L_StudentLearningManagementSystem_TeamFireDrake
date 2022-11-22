@@ -87,12 +87,11 @@ def DROP_WITHDRAWL():
 
     classButtons = list[tk.Button]()
     classFiles = list[str]()
-    if (len(os.listdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile))) > 0):
-        for i, file in enumerate(os.listdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile))):
-            if ("course" in file):
-                course = file[file.index("e")+1:file.index(".")]
-                classFiles.append(file)
-                classButtons.append(tk.Button(classSelectionFrame,bg="grey",fg="white",text="Drop "+course,font='Helvetica 12 bold', command=lambda: Drop(classFiles[i], i)).grid(row = i, column = 1))
+    for i, file in enumerate(os.listdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile))):
+        if ("course" in file):
+            course = file[file.index("e")+1:file.index(".")]
+            classFiles.append(file)
+            classButtons.append(tk.Button(classSelectionFrame,bg="grey",fg="white",text="Drop "+course,font='Helvetica 12 bold', command=lambda: Drop(classFiles[classFiles.index("course"+course+".csv")], classFiles.index("course"+course+".csv"))).grid(row = i, column = 1))
 
     # Back Button
     btnBack = tk.Button(drop_withdrawl, text = 'Back', fg='white', bg='grey', font='Helvetica 12 bold', command=Back)
