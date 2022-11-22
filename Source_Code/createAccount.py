@@ -14,7 +14,6 @@ Other Requirements: TKInter for Interface Design.
 '''
 def CREATE_ACCOUNT():
     import tkinter as tk
-    #from tkinter import *
     import os
     import csv
     import pathlib

@@ -70,6 +70,8 @@ def MAIN_PAGE():
     frame3=tk.Frame(window,bg="Gray",width=249,height=249)
     frame3.grid(row=1,column=0)
 
+    # this block of code includes the sourceCodeLibrary.import sourceCodeLibrary.GetMostRecentSemesterDirectory() function
+    # but I don't want to call it here because I use this same for loop to sort the semesters in order
     semesters = os.listdir(os.getcwd())
     sortedSemesters = list[str]()
     mostRecentSemesterFile = ""
@@ -118,11 +120,9 @@ def MAIN_PAGE():
                     sortedSession = 4
             if (sortedYear > mostRecentSortedYear):
                 mostRecentSortedYear = sortedYear
-                mostRecentSortedSemesterFile = sem
             elif (sortedYear == mostRecentSortedYear):
                 if (sortedSession > mostRecentSortedSession):
                     mostRecentSortedSession = sortedSession
-                    mostRecentSortedSemesterFile = sem
             if (year == sortedYear):
                 if (session > sortedSession):
                     sortedSemesters.insert(semesters.index(sem)-1, semester)

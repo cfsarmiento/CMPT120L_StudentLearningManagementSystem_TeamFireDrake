@@ -25,12 +25,7 @@ def ADJUST_CURRENT_SEMESTER():
         window.destroy()
         import dropClass
         dropClass.DROP_WITHDRAWL()
-    '''
-    def EditClass():
-        window.destroy()
-        import add_edit_grades
-        add_edit_grades.ADD_EDIT_GRADES()
-    '''
+    
     def Back():
         window.destroy()
         import mainPage

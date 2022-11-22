@@ -10,45 +10,11 @@ Other Requirements: TKInter for Interface Design.
 '''
 def ADD_CLASS():
     import tkinter as tk
-    #from tkinter import *
     import os
     import csv
-    import pathlib
-    os.chdir(pathlib.Path(__file__).parent.resolve())
-    accountFile = ""
-    with open("currentLogin.csv", "r", newline = "") as csvfile:
-        reader = csv.reader(csvfile)
-        for line in reader:
-            accountFile = line[0]
-    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters"))
-    semesters = os.listdir(os.getcwd())
-    mostRecentSemesterFile = ""
-    mostRecentYear = 0
-    mostRecentSession = 0   # 1 = fall, 2 = winter, 3 = spring, 4 = summer
-    for semester in semesters:
-        if os.path.isdir(os.path.join(os.getcwd(), semester)):
-            # for determining the most recent semester
-            year = int(semester[semester.index("_")+1:semester.rindex("_")])
-            session = 0
-            match semester[semester.rindex("_")+1:].lower():
-                case "fall":
-                    session = 1
-                case "autumn":  # just in case anyone writes this
-                    session = 1
-                case "winter":
-                    session = 2
-                case "spring":
-                    session = 3
-                case "summer":
-                    session = 4
-            if (year > mostRecentYear):
-                mostRecentYear = year
-                mostRecentSemesterFile = semester
-            elif (year == mostRecentYear):
-                if (session > mostRecentSession):
-                    mostRecentSession = session
-                    mostRecentSemesterFile = semester
-    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile))
+    import sourceCodeLibrary
+    mostRecentSemesterDirectory = sourceCodeLibrary.GetMostRecentSemesterDirectory()
+    os.chdir(mostRecentSemesterDirectory)
 
     window=tk.Tk()
     window.configure(bg='grey')
@@ -101,8 +67,6 @@ def ADD_CLASS():
         credit4Button.configure(bg="orange")
 
     def AddClass():
-        # save class info to classes.csv
-        # talk to Christian about format
         courseAbbr = courseAbbrEntry.get()
         homework = homeworkEntry.get()
         test = testEntry.get()

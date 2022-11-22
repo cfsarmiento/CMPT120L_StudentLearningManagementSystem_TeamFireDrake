@@ -13,7 +13,6 @@ Other Requirements: TKInter for Interface Design.
 '''
 def LOGIN():
     import tkinter as tk
-    #from tkinter import *
     import os
     import csv
     import pathlib

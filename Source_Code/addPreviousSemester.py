@@ -20,7 +20,6 @@ Other Requirements: TKInter for Interface Design.
 '''
 def ADD_PREVIOUS_SEMESTER():
     import tkinter as tk
-    #from tkinter import *
     import os
     import csv
     import pathlib
