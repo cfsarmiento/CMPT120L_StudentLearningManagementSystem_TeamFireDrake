@@ -47,7 +47,8 @@ def EDIT_ASSIGNMENT(course):
                 writer = csv.writer(csvfile)
                 writer.writerows(courseFile)
             assignmentLabel.configure(text = "Assignment saved: " + newName)
-            # it also needs to update the gpa
+            #import sourceCodeLibrary
+            #sourceCodeLibrary.CalculateCourseGrade()
         except:
             assignmentLabel.configure(text = "Could not save assignment: " + newName)
 
