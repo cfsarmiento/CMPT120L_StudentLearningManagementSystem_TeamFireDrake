@@ -45,7 +45,7 @@ def CREATE_ACCOUNT():
                 for num in accountFolders:
                     if (accountNum > num):
                         accountFolders.insert(accountFolders.index(num)+1, accountNum)
-        firstAvailableNum = len(accountFolders)
+        firstAvailableNum = len(accountFolders)+1
         for i, folder in enumerate(accountFolders):
             if (folder != i):
                 firstAvailableNum = i
