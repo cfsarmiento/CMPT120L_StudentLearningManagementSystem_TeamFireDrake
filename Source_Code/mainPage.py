@@ -134,7 +134,7 @@ def MAIN_PAGE():
 
     for i, file in enumerate(os.listdir(os.path.join(os.getcwd(), mostRecentSemesterFile)), start = 1):
         if (os.path.isfile(os.path.join(os.getcwd(), mostRecentSemesterFile, file)) and file != "semesterInfo.csv"):
-            course = file[file.index("e")+1:file.index(".")]
+            course = file[file.index("e")+1:file.rindex(".")]
             tk.Button(frame3,bg="Gray",fg="White",text=course,font='Helvetica 12 bold', command=lambda: Class(course)).grid(row=3+i,column=0,pady=5)
 
     frame4=tk.Frame(window,bg="Gray",highlightbackground="White",highlightthickness=1,width=500,height=100)

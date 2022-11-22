@@ -49,15 +49,15 @@ def CLASS_MANAGER(course):
     os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile))
 
     # get info from the course
-    info = ["Course: ","Credits: ","Homework: ","Test: ","Project: ","Quiz: ","Essay: "]
-    with open("course" + course + ".csv", "r", newline="") as csvfile:
+    info = ["Course: ", "Credits: ", "Grade: ", "Homework: ", "Test: ", "Project: ", "Quiz: ", "Essay: "]
+    with open("course"+course+".csv", "r", newline="") as csvfile:
         reader = csv.reader(csvfile)
         for line in reader:
             for i, row in enumerate(line):
-                if "Course:    " in row or " Credits:    " in row or " Homework:    " in row or " Test:    " in row or " Project:    " in row or " Quiz:    " in row or " Essay:    " in row:
+                if "Course: " in row or " Credits: " in row or "Grade: " in row or " Homework: " in row or " Test: " in row or " Project: " in row or " Quiz: " in row or " Essay: " in row:
                     info[i] = row
     # info should look something like this as an example
-    # ["Course: CMPT_120","Credits: 4","Homework: 20","Test: 40","Project: 40","Quiz: ","Essay: "]
+    # ["Course: CMPT_120","Credits: 4", "Grade: 94", "Homework: 20","Test: 40","Project: 40","Quiz: ","Essay: "]
 
     window=Tk()
     window.title('Class Manager')
@@ -124,7 +124,6 @@ def CLASS_MANAGER(course):
     headerWeightLabel.create_text(80,25, text="Assignment Title", fill="white", font=('Helvetica 12 bold'))
     headerWeightLabel.grid(row=1,column=2)
 
-
     for rowIndex, assignment in enumerate(assignments):
         for columnIndex in range(0,3):
             match columnIndex:
@@ -142,4 +141,3 @@ def CLASS_MANAGER(course):
                     canvas.grid(row=rowIndex+2,column=columnIndex+2)
 
     window.mainloop()
-CLASS_MANAGER("CMPT 120")
