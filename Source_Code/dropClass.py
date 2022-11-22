@@ -51,12 +51,11 @@ def DROP_WITHDRAWL():
                     mostRecentSemesterFile = semester
     os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile))
     
-    def Drop(file, index):
+    def Drop(file):
         os.remove(file)
-        classButtons.pop(index).destroy()
-        i = 0
-        for i, button in enumerate(classButtons, start = index):
-            button.configure(row = i)
+        drop_withdrawl.destroy()
+        import adjustCurrentSemester
+        adjustCurrentSemester.ADJUST_CURRENT_SEMESTER()
 
     def Back():
         drop_withdrawl.destroy()
@@ -91,7 +90,7 @@ def DROP_WITHDRAWL():
         if ("course" in file):
             course = file[file.index("e")+1:file.index(".")]
             classFiles.append(file)
-            classButtons.append(tk.Button(classSelectionFrame,bg="grey",fg="white",text="Drop "+course,font='Helvetica 12 bold', command=lambda: Drop(classFiles[classFiles.index("course"+course+".csv")], classFiles.index("course"+course+".csv"))).grid(row = i, column = 1))
+            classButtons.append(tk.Button(classSelectionFrame,bg="grey",fg="white",text="Drop "+course,font='Helvetica 12 bold', command=lambda: Drop(classFiles[classFiles.index("course"+course+".csv")])).grid(row = i, column = 1))
 
     # Back Button
     btnBack = tk.Button(drop_withdrawl, text = 'Back', fg='white', bg='grey', font='Helvetica 12 bold', command=Back)
