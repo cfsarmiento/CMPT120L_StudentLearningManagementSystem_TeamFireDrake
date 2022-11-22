@@ -1,7 +1,10 @@
 '''
 '''
 def CalculateCourseGrade():
-    # to be called in add/edit/remove Assignment.py where indicated by a #comment
+    # to be called in add/edit/remove Assignment.py where indicated by the #comment
+    import os
+    import pathlib
+    import csv
 
     # reads through course___.csv of this course and calculates the course grade
     # writes this course grade back into course___.csv
@@ -50,4 +53,4 @@ def GetMostRecentSemesterDirectory():
                 if (session > mostRecentSession):
                     mostRecentSession = session
                     mostRecentSemesterFile = semester
-        return os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile)
+    return os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", mostRecentSemesterFile)
