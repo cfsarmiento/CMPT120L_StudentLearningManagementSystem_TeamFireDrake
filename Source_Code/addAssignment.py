@@ -17,7 +17,7 @@ def ADD_ASSIGNMENT(course):
 
     window=tk.Tk()
     window.title('Add Assignment')
-    window.geometry("300x250")
+    window.geometry("400x250")
     window.configure(bg='grey')
 
     def Add():
