@@ -1,7 +1,7 @@
 '''
 Title: Student Learning Management System
 Window: Add Previous Semester
-Author: Christian Sarmiento
+Author: Ethan Morton and Christian Sarmiento
 Class: CMPT120L
 Professor: Reza Sadeghi
 Goal: Allows student to add past GPAs 
