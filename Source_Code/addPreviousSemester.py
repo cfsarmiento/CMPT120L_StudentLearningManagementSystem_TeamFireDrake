@@ -1,7 +1,7 @@
 '''
 Title: Student Learning Management System
 Window: Add Previous Semester
-Author: Ethan Morton and Christian Sarmiento
+Author: Christian Sarmiento
 Class: CMPT120L
 Professor: Reza Sadeghi
 Goal: Allows student to add past GPAs 
@@ -23,13 +23,9 @@ def ADD_PREVIOUS_SEMESTER():
     import os
     import csv
     import pathlib
-    os.chdir(pathlib.Path(__file__).parent.resolve())
-    accountFile = ""
-    with open("currentLogin.csv", "r", newline = "") as csvfile:
-        reader = csv.reader(csvfile)
-        for line in reader:
-            accountFile = line[0]
-    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters"))
+    import sourceCodeLibrary
+    dict = sourceCodeLibrary.GetAccountDirectory()
+    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", dict["accountPath"], "Semesters"))
 
     # Window
     semester_settings = tk.Tk()
@@ -41,6 +37,7 @@ def ADD_PREVIOUS_SEMESTER():
         year = entryYear.get() # year must be an integer
         session = entrySession.get() # session must either be "fall", "winter", "spring", "summer"  -  not case sensative
         gpa = entryFinalGPA.get() # gpa must be a float
+        totalCredits = totalCreditsEntry.get()
         season = 0
         match session.lower():
             case "fall":
@@ -56,16 +53,18 @@ def ADD_PREVIOUS_SEMESTER():
         if season != 0:
             if not os.path.exists(f"Semester_{year}_{session}"):
                 os.makedirs(f"Semester_{year}_{session}")
-            os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", f"Semester_{year}_{session}"))
+            os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", dict["accountPath"], "Semesters", f"Semester_{year}_{session}"))
             with open("semesterInfo.csv", "w", newline="") as csvfile:
                 writer = csv.writer(csvfile)
-                writer.writerow(["Year: " + year, "Session: " + session, "GPA: " + gpa])
+                writer.writerow(["Year: " + year, "Session: " + session, "GPA: " + gpa, "Total Course Credits: " + totalCredits])
+            import sourceCodeLibrary
+            sourceCodeLibrary.CalculateCumulativeGPA()
             semester_settings.destroy()
             import mainPage
             mainPage.MAIN_PAGE()
         else:
             createSemesterLabel = tk.Label(inputFrame, text = "The session must be entered as\nFall or Autumn\nWinter\nSpring\nSummer", bg = 'grey', fg = 'white', font = 'Helvetica 12 bold', padx = 20, pady = 10)
-            createSemesterLabel.grid(row = 3, column = 1)
+            createSemesterLabel.grid(row = 4, column = 1)
 
     def Back():
         semester_settings.destroy()
@@ -130,6 +129,11 @@ def ADD_PREVIOUS_SEMESTER():
                         bg = 'white')
     entryFinalGPA.grid(row = 2, column = 1)
 
+    totalCreditsLabel = tk.Label(inputFrame,text = 'Total Course Credits:',bg = 'grey',fg = 'white')
+    totalCreditsLabel.grid(row = 3, column = 0)
+    totalCreditsEntry = tk.Entry(inputFrame,bg = 'white')
+    totalCreditsEntry.grid(row = 3, column = 1)
+
     # Button to Finalize Past GPA Entry
     btnFinalize = tk.Button(inputFrame,
                             text = 'Finalize',
@@ -137,9 +141,9 @@ def ADD_PREVIOUS_SEMESTER():
                             fg = 'white',
                             padx = 55,
                             command = Finalize)
-    btnFinalize.grid(row = 4, column = 1)
+    btnFinalize.grid(row = 5, column = 1)
 
     backButton = tk.Button(inputFrame,text = 'Back',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = Back)
-    backButton.grid(row = 5, column = 1)
+    backButton.grid(row = 6, column = 1)
                                 
     semester_settings.mainloop()

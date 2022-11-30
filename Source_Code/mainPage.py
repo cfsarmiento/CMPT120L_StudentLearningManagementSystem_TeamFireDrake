@@ -14,16 +14,9 @@ def MAIN_PAGE():
     import os
     import csv
     import pathlib
-    os.chdir(pathlib.Path(__file__).parent.resolve())
-    accountFile = ""
-    with open("currentLogin.csv", "r", newline = "") as csvfile:
-        reader = csv.reader(csvfile)
-        for line in reader:
-            accountFile = line[0]
-    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile))
-    if not os.path.exists("Semesters"):
-        os.makedirs("Semesters")
-    os.chdir(os.path.join(os.getcwd(), "Semesters"))
+    import sourceCodeLibrary
+    dict = sourceCodeLibrary.GetAccountDirectory()
+    os.chdir(os.path.join(dict["semestersPath"], "Semesters"))
 
     window=tk.Tk()
     window.title("Main Page")
@@ -41,7 +34,7 @@ def MAIN_PAGE():
         addPreviousSemester.ADD_PREVIOUS_SEMESTER()
 
     def AdjustSemester():
-        if (len(os.listdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters"))) > 0):
+        if (len(os.listdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", dict["accountPath"], "Semesters"))) > 0):
             window.destroy()
             import adjustCurrentSemester
             adjustCurrentSemester.ADJUST_CURRENT_SEMESTER()
@@ -65,7 +58,7 @@ def MAIN_PAGE():
 
     frame2=tk.Frame(window,bg="Gray",width=500,height=140)
     frame2.grid(row=0,column=1)
-    label= tk.Label(bg="Gray", fg="White", text="Semester GPA:    \nCummulative GPA:     ", font='Helvetica 12 bold').grid(row=0,column=2)
+    label= tk.Label(bg="Gray", fg="White", text="Cummulative GPA: "+str(dict["cumulativeGPA"]), font='Helvetica 12 bold').grid(row=0,column=2)
 
     frame3=tk.Frame(window,bg="Gray",width=249,height=249)
     frame3.grid(row=1,column=0)
@@ -167,7 +160,7 @@ def MAIN_PAGE():
     table = [[],[],[]]
     i = 0
     for i, semester in enumerate(sortedSemesters, start = 1):
-        os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", semester))
+        os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", dict["accountPath"], "Semesters", semester))
         with open("semesterInfo.csv", "r", newline="") as csvfile:
             reader = csv.reader(csvfile)
             for line in reader:

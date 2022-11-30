@@ -1,7 +1,7 @@
 '''
 Title: Student Learning Management System
 Window: Add current Semester
-Author: Ethan Morton and Christian Sarmiento
+Author: Christian Sarmiento
 Class: CMPT120L
 Professor: Reza Sadeghi
 Goal: Allows student to add a new semester which they can add classes to
@@ -21,13 +21,9 @@ def ADD_CURRENT_SEMESTER():
     import os
     import csv
     import pathlib
-    os.chdir(pathlib.Path(__file__).parent.resolve())
-    accountFile = ""
-    with open("currentLogin.csv", "r", newline = "") as csvfile:
-        reader = csv.reader(csvfile)
-        for line in reader:
-            accountFile = line[0]
-    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters"))
+    import sourceCodeLibrary
+    dict = sourceCodeLibrary.GetAccountDirectory()
+    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", dict["accountPath"], "Semesters"))
 
     # Window
     new_semester = tk.Tk()
@@ -53,10 +49,10 @@ def ADD_CURRENT_SEMESTER():
         if season != 0:
             if not os.path.exists(f"Semester_{year}_{session}"):
                 os.makedirs(f"Semester_{year}_{session}")
-            os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters", f"Semester_{year}_{session}"))
+            os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", dict["accountPath"], "Semesters", f"Semester_{year}_{session}"))
             with open("semesterInfo.csv", "w", newline="") as csvfile:
                 writer = csv.writer(csvfile)
-                writer.writerow(["Year: " + year, "Session: " + session, "GPA: "])
+                writer.writerow(["Year: " + year, "Session: " + session, "GPA: 0", "Total Course Credits: 0"])
             new_semester.destroy()
             import mainPage
             mainPage.MAIN_PAGE()

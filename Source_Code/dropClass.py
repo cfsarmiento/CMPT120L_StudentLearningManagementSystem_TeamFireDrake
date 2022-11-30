@@ -26,6 +26,8 @@ def DROP_WITHDRAWL():
         course=searchEntry.get()
         try:
             os.remove("course"+course+".csv")
+            import sourceCodeLibrary
+            sourceCodeLibrary.CalculateSemesterGPA()
             drop_withdrawl.destroy()
             import adjustCurrentSemester
             adjustCurrentSemester.ADJUST_CURRENT_SEMESTER()

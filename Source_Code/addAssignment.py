@@ -29,8 +29,7 @@ def ADD_ASSIGNMENT(course):
                 writer = csv.writer(csvfile)
                 writer.writerow([name, grade, weight])
             addLabel.configure(text = "Assignment added: " + name)
-            #import sourceCodeLibrary
-            #sourceCodeLibrary.CalculateCourseGrade()
+            sourceCodeLibrary.CalculateCourseGrade(course)
         except:
             addLabel.configure(text = "Could not add assignment: " + name)
     

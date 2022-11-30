@@ -42,8 +42,8 @@ def REMOVE_ASSIGNMENT(course):
                 writer = csv.writer(csvfile)
                 writer.writerows(courseFile)
             assignmentLabel.configure(text = "Assignment removed: " + searchName)
-            #import sourceCodeLibrary
-            #sourceCodeLibrary.CalculateCourseGrade()
+            import sourceCodeLibrary
+            sourceCodeLibrary.CalculateCourseGrade(course)
         except:
             assignmentLabel.configure(text = "Could not remove assignment: " + searchName)
 
