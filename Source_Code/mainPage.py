@@ -58,7 +58,8 @@ def MAIN_PAGE():
 
     frame2=tk.Frame(window,bg="Gray",width=500,height=140)
     frame2.grid(row=0,column=1)
-    label= tk.Label(bg="Gray", fg="White", text="Cummulative GPA: "+str(dict["cumulativeGPA"]), font='Helvetica 12 bold').grid(row=0,column=2)
+    label= tk.Label(bg="Gray", fg="White", text="Cummulative GPA: {:0.2f}".format(float(dict["cumulativeGPA"])), font='Helvetica 12 bold')
+    label.grid(row=0,column=2)
 
     frame3=tk.Frame(window,bg="Gray",width=249,height=249)
     frame3.grid(row=1,column=0)
@@ -166,7 +167,7 @@ def MAIN_PAGE():
             for line in reader:
                 table[0].append(tk.Label(yearFrame, bg = "Gray", fg = "White", text = line[0][line[0].index(" ")+1:], font = 'Helvetica 12 bold').grid(row=i,column=0, sticky = W))
                 table[1].append(tk.Label(semesterFrame, bg = "Gray", fg = "White", text = line[1][line[1].index(" ")+1:], font = 'Helvetica 12 bold').grid(row=i,column=0, sticky = W))
-                table[2].append(tk.Label(gpaFrame, bg = "Gray", fg = "White", text = line[2][line[2].index(" ")+1:], font = 'Helvetica 12 bold').grid(row=i,column=0, sticky = W))
+                table[2].append(tk.Label(gpaFrame, bg = "Gray", fg = "White", text = "{:0.2f}".format(float(line[2][line[2].index(" ")+1:])), font = 'Helvetica 12 bold').grid(row=i,column=0, sticky = W))
 
     frame5=tk.Frame(window,bg="Gray", width=500,height=300)
     frame5.grid(row=1, column=2)

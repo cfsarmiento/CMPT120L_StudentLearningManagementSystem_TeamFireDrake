@@ -136,7 +136,7 @@ def GetAccountDirectory():
         reader = csv.reader(csvfile)
         for line in reader:
             accountFile = line[0]
-            cumulativeGPA = line[1]
+            cumulativeGPA = line[1][line[1].rindex(" ")+1:]
     os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile))
     return {"accountPath": accountFile,"cumulativeGPA": cumulativeGPA,"semestersPath": os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters")}
     

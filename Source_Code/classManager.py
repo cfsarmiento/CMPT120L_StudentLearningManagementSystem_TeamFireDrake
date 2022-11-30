@@ -90,11 +90,11 @@ def CLASS_MANAGER(course):
                     canvas.grid(row=rowIndex+2,column=columnIndex+2)
                 case 1:
                     canvas = Canvas(window, width= 70, height= 50, bg="grey")
-                    canvas.create_text(35,25, text=assignment[columnIndex], fill="white", font=('Helvetica 12 bold'))
+                    canvas.create_text(35,25, text="{:0.2f}".format(float(assignment[columnIndex])), fill="white", font=('Helvetica 12 bold'))
                     canvas.grid(row=rowIndex+2,column=columnIndex+2)
                 case 2:
                     canvas = Canvas(window, width= 120, height= 50, bg="grey")
-                    canvas.create_text(40,25, text=assignment[columnIndex], fill="white", font=('Helvetica 12 bold'))
+                    canvas.create_text(40,25, text="{:0.2f}%".format(float(assignment[columnIndex])), fill="white", font=('Helvetica 12 bold'))
                     canvas.grid(row=rowIndex+2,column=columnIndex+2)
 
     window.mainloop()
