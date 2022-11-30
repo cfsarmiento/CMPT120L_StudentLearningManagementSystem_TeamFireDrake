@@ -58,7 +58,8 @@ def CREATE_ACCOUNT():
             os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", "Account" + str(firstAvailableNum)))
             with open("loginInfo.csv", "w", newline = "") as csvfile:
                 writer = csv.writer(csvfile)
-                writer.writerow([username, password])
+                writer.writerow([username, password, "GPA: 0"])
+            os.makedirs("Semesters")
             window.destroy()
             import login
             login.LOGIN()

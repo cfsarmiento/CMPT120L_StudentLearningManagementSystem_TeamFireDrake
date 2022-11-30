@@ -132,11 +132,11 @@ def GetAccountDirectory():
         reader = csv.reader(csvfile)
         for line in reader:
             accountFile = line[0]
-            cumulativeGPA = line[2]
+            cumulativeGPA = line[1]
     os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile))
-    if not os.path.exists("Semesters"):
-        os.makedirs("Semesters")
-    return {"accountPath": accountFile,"cumulativeGPA": cumulativeGPA,"semestersPath": os.path.join(os.getcwd(), "Semesters")}
+    #if not os.path.exists("Semesters"):
+    #    os.makedirs("Semesters")
+    return {"accountPath": accountFile,"cumulativeGPA": cumulativeGPA,"semestersPath": os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters")}
     
 
 # returns the directory of the most recent semester
@@ -150,6 +150,8 @@ def GetMostRecentSemesterDirectory():
         reader = csv.reader(csvfile)
         for line in reader:
             accountFile = line[0]
+    #if not os.path.exists("Semesters"):
+    #    os.makedirs("Semesters")
     os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters"))
     mostRecentSemesterFile = ""
     mostRecentYear = 0

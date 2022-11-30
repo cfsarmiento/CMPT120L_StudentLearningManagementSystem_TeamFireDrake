@@ -43,7 +43,10 @@ def LOGIN():
             os.chdir(pathlib.Path(__file__).parent.resolve())
             with open("currentLogin.csv", "w", newline = "") as csvfile:
                 writer = csv.writer(csvfile)
-                writer.writerow([accountFile])
+                writer.writerow([accountFile, "GPA: 0"])
+            import sourceCodeLibrary
+            if os.path.exists("semesterInfo.csv"):
+                sourceCodeLibrary.CalculateCumulativeGPA()
             window.destroy()
             import mainPage
             mainPage.MAIN_PAGE()

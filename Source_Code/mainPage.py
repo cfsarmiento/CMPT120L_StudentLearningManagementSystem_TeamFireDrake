@@ -16,7 +16,7 @@ def MAIN_PAGE():
     import pathlib
     import sourceCodeLibrary
     dict = sourceCodeLibrary.GetAccountDirectory()
-    os.chdir(os.path.join(dict["semestersPath"], "Semesters"))
+    os.chdir(os.path.join(dict["semestersPath"]))
 
     window=tk.Tk()
     window.title("Main Page")
