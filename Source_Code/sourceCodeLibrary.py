@@ -28,7 +28,7 @@ def CalculateCourseGrade(course):
         writer.writerows(courseInfo)
     CalculateSemesterGPA()
 
-# calculates semester and cumulative GPA and updates the GUI
+# calculates semester GPA and updates the GUI
 def CalculateSemesterGPA():
     import os
     import csv
@@ -61,6 +61,7 @@ def CalculateSemesterGPA():
         writer.writerow(semesterInfo)
     CalculateCumulativeGPA()
 
+# calculates the cumulative GPA and updates the GUI
 def CalculateCumulativeGPA():
     import os
     import pathlib
@@ -115,12 +116,15 @@ def GradeToGPA(grade):
         gpa=1.7
     elif (grade >= 67):
         gpa=1.3
-    elif(grade >= 65):
+    elif(grade >= 63):
         gpa=1.0
-    elif(grade < 65):
+    elif(grade >= 60):
+        gpa=0.7
+    elif(grade < 60):
         gpa=0.0
     return gpa
 
+# returns a dictionary with the name of the file of the account currently logged in, the cumulative GPA, and the path to the Semesters folder in this account directory
 def GetAccountDirectory():
     import os
     import csv
@@ -134,8 +138,6 @@ def GetAccountDirectory():
             accountFile = line[0]
             cumulativeGPA = line[1]
     os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile))
-    #if not os.path.exists("Semesters"):
-    #    os.makedirs("Semesters")
     return {"accountPath": accountFile,"cumulativeGPA": cumulativeGPA,"semestersPath": os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters")}
     
 
@@ -150,8 +152,6 @@ def GetMostRecentSemesterDirectory():
         reader = csv.reader(csvfile)
         for line in reader:
             accountFile = line[0]
-    #if not os.path.exists("Semesters"):
-    #    os.makedirs("Semesters")
     os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", accountFile, "Semesters"))
     mostRecentSemesterFile = ""
     mostRecentYear = 0
