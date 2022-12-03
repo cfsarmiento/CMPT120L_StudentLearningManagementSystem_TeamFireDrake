@@ -21,36 +21,39 @@ def EDIT_ASSIGNMENT(course):
     window.configure(bg='grey')
 
     def Search():
-        try:
-            searchName = nameEntry.get()
-            with open("course"+course+".csv", "r", newline="") as csvfile:
-                reader = csv.reader(csvfile)
-            assignmentLabel.configure(text = "Assignment Found: " + searchName)
-        except:
-            assignmentLabel.configure(text = "Could not find assignment: " + searchName)
+        searchName = nameEntry.get()
+        assignmentLabel.configure(text = "Could not find assignment: " + searchName)
+        with open("course"+course+".csv", "r", newline="") as csvfile:
+            reader = csv.reader(csvfile)
+            for line in reader:
+                if (searchName == line[0]):
+                    assignmentLabel.configure(text = "Assignment Found: " + line[0])
+                    break
 
     def Save():
-        try:
-            searchName = nameEntry.get()
-            newName = newNameEntry.get()
-            newGrade = newGradeEntry.get()
-            newWeight = newWeightEntry.get()
-            courseFile = []
-            with open("course"+course+".csv", "r", newline="") as csvfile:
-                reader = csv.reader(csvfile)
-                for line in reader:
-                    if (line[0] == searchName):
-                        courseFile.append([newName, newGrade, newWeight])
-                    else:
-                        courseFile.append(line)
-            with open("course"+course+".csv", "w", newline="") as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerows(courseFile)
-            assignmentLabel.configure(text = "Assignment saved: " + newName)
-            import sourceCodeLibrary
-            sourceCodeLibrary.CalculateCourseGrade(course)
-        except:
+        searchName = nameEntry.get()
+        newName = newNameEntry.get()
+        newGrade = newGradeEntry.get()
+        newWeight = newWeightEntry.get()
+        found = False
+        courseFile = []
+        with open("course"+course+".csv", "r", newline="") as csvfile:
+            reader = csv.reader(csvfile)
+            for line in reader:
+                if (line[0] == searchName):
+                    courseFile.append([newName, newGrade, newWeight])
+                    found = True
+                else:
+                    courseFile.append(line)
+        if not found:
             assignmentLabel.configure(text = "Could not save assignment: " + newName)
+            return
+        with open("course"+course+".csv", "w", newline="") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerows(courseFile)
+        assignmentLabel.configure(text = "Assignment saved: " + newName)
+        import sourceCodeLibrary
+        sourceCodeLibrary.CalculateCourseGrade(course)
 
     def Back(course):
         window.destroy()
@@ -65,10 +68,10 @@ def EDIT_ASSIGNMENT(course):
     searchButton = tk.Button(window, text="Search", bg='grey', fg='white',font=("Helvetica 10 bold"), command = Search)
     searchButton.grid(row = 0, column = 2)
 
-    assignmentLabel = tk.Label(window, text="Assignment Found:", bg='grey', fg='white', font=("Helvetica 12 bold"))
+    assignmentLabel = tk.Label(window, text="", bg='grey', fg='white', font=("Helvetica 12 bold"))
     assignmentLabel.grid(row = 1, column = 0)
 
-    newNameLabel = tk.Label(window, text="Assignment Title:", bg='grey', fg='white', font=("Helvetica 12 bold"))
+    newNameLabel = tk.Label(window, text="New Assignment Title:", bg='grey', fg='white', font=("Helvetica 12 bold"))
     newNameLabel.grid(row = 2, column = 0)
     newNameEntry = tk.Entry(window)
     newNameEntry.grid(row = 2, column = 1)

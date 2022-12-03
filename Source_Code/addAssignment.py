@@ -22,6 +22,11 @@ def ADD_ASSIGNMENT(course):
 
     def Add():
         try:
+            float(gradeEntry.get())
+            float(weightEntry.get())
+        except:
+            addLabel.configure(text = "Grade and Weight must be decimals or integers")
+        else:
             name = nameEntry.get()
             grade = gradeEntry.get()
             weight = weightEntry.get()
@@ -30,8 +35,6 @@ def ADD_ASSIGNMENT(course):
                 writer.writerow([name, grade, weight])
             addLabel.configure(text = "Assignment added: " + name)
             sourceCodeLibrary.CalculateCourseGrade(course)
-        except:
-            addLabel.configure(text = "Could not add assignment: " + name)
     
     def Back(course):
         window.destroy()

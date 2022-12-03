@@ -55,7 +55,7 @@ def CalculateSemesterGPA():
             semesterInfo = row
             break
     semesterInfo[2] = "GPA: " + str(semesterGPA)
-    semesterInfo.append("Total Course Credits: " + str(sum(courseCredits)))
+    semesterInfo[3] = "Total Course Credits: " + str(sum(courseCredits))
     with open("semesterInfo.csv", "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(semesterInfo)
@@ -81,7 +81,10 @@ def CalculateCumulativeGPA():
                     cumulativeCredits += float(row[3][row[3].rindex(" ")+1:])
                     i += 1
                     break
-    cumulativeGPA /= cumulativeCredits
+    if (cumulativeCredits == 0):
+        cumulativeGPA = 0
+    else:
+        cumulativeGPA /= cumulativeCredits
     os.chdir(pathlib.Path(mostRecentSemesterDirectory).parent.parent)
     loginInfo = []
     with open("loginInfo.csv", "r", newline="") as csvfile:

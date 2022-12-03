@@ -30,7 +30,7 @@ def ADD_PREVIOUS_SEMESTER():
     # Window
     semester_settings = tk.Tk()
     semester_settings.title('Add Previous Semester')  # title for window
-    semester_settings.geometry('400x300')  # window size
+    semester_settings.geometry('450x300')  # window size
     semester_settings.configure(bg ='grey')  # color
 
     def Finalize():
@@ -50,21 +50,27 @@ def ADD_PREVIOUS_SEMESTER():
                 season = 3
             case "summer":
                 season = 4
-        if season != 0:
-            if not os.path.exists(f"Semester_{year}_{session}"):
-                os.makedirs(f"Semester_{year}_{session}")
-            os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", dict["accountPath"], "Semesters", f"Semester_{year}_{session}"))
-            with open("semesterInfo.csv", "w", newline="") as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerow(["Year: " + year, "Session: " + session, "GPA: " + gpa, "Total Course Credits: " + totalCredits])
-            import sourceCodeLibrary
-            sourceCodeLibrary.CalculateCumulativeGPA()
-            semester_settings.destroy()
-            import mainPage
-            mainPage.MAIN_PAGE()
+        try:
+            int(year)
+            float(gpa)
+            int(totalCredits)
+        except:
+            createSemesterLabel.configure(text="Year and Total Credits must be an integer,\nand GPA must be a decimal or integer")
         else:
-            createSemesterLabel = tk.Label(inputFrame, text = "The session must be entered as\nFall or Autumn\nWinter\nSpring\nSummer", bg = 'grey', fg = 'white', font = 'Helvetica 12 bold', padx = 20, pady = 10)
-            createSemesterLabel.grid(row = 4, column = 1)
+            if season != 0:
+                if not os.path.exists(f"Semester_{year}_{session}"):
+                    os.makedirs(f"Semester_{year}_{session}")
+                os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", dict["accountPath"], "Semesters", f"Semester_{year}_{session}"))
+                with open("semesterInfo.csv", "w", newline="") as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow(["Year: " + year, "Session: " + session, "GPA: " + gpa, "Total Course Credits: " + totalCredits])
+                import sourceCodeLibrary
+                sourceCodeLibrary.CalculateCumulativeGPA()
+                semester_settings.destroy()
+                import mainPage
+                mainPage.MAIN_PAGE()
+            else:
+                createSemesterLabel.configure(text="The session must be entered as\nFall or Autumn\nWinter\nSpring\nSummer")
 
     def Back():
         semester_settings.destroy()
@@ -133,6 +139,9 @@ def ADD_PREVIOUS_SEMESTER():
     totalCreditsLabel.grid(row = 3, column = 0)
     totalCreditsEntry = tk.Entry(inputFrame,bg = 'white')
     totalCreditsEntry.grid(row = 3, column = 1)
+
+    createSemesterLabel = tk.Label(inputFrame, text = "", bg = 'grey', fg = 'white', font = 'Helvetica 12 bold', padx = 20, pady = 10)
+    createSemesterLabel.grid(row = 4, column = 1)
 
     # Button to Finalize Past GPA Entry
     btnFinalize = tk.Button(inputFrame,

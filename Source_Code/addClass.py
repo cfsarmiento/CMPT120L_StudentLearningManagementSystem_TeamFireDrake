@@ -45,10 +45,15 @@ def ADD_CLASS():
             credits = 3
         elif (credit4Button["bg"] == "orange"):
             credits = 4
-        classInfo = ["Course: " + courseAbbr, "Credits: " + str(credits), "Grade: "]
+        if (courseAbbr == "" or credits == 0):
+            errorLabel.configure(text='Please choose a name and credits')
+            return
+        classInfo = ["Course: " + courseAbbr, "Credits: " + str(credits), "Grade: 0"]
         with open(f"course{courseAbbr}.csv", "w", newline = "") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(classInfo)
+        import sourceCodeLibrary
+        sourceCodeLibrary.CalculateSemesterGPA()
         window.destroy()
         import mainPage
         mainPage.MAIN_PAGE()
@@ -86,10 +91,13 @@ def ADD_CLASS():
     credit4Button = tk.Button(creditsFrame, bg = 'black', fg='white',font='Helvetica 12 bold',text = '4', command = Credit4)
     credit4Button.grid(column = 2, row = 0)
 
+    errorLabel = tk.Label(bottomFrame, text = "", font='Helvetica 12 bold', fg='white',bg = 'grey')
+    errorLabel.grid(column = 0, row = 2)
+
     addButton = tk.Button(bottomFrame, bg = 'black', fg='white',font='Helvetica 12 bold',text = 'Add Class', command = AddClass)
-    addButton.grid(column = 0, row = 2)
+    addButton.grid(column = 0, row = 3)
 
     backButton = tk.Button(bottomFrame, bg = 'black', fg='white',font='Helvetica 12 bold',text = 'Back', command = Back)
-    backButton.grid(column = 0, row = 3)
+    backButton.grid(column = 0, row = 4)
 
     window.mainloop()

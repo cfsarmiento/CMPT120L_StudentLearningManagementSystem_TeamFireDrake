@@ -21,31 +21,35 @@ def REMOVE_ASSIGNMENT(course):
     window.configure(bg='grey')
 
     def Search():
-        try:
-            searchName = nameEntry.get()
-            with open("course"+course+".csv", "r", newline="") as csvfile:
-                reader = csv.reader(csvfile)
-            assignmentLabel.configure(text = "Assignment Found: " + searchName)
-        except:
-            assignmentLabel.configure(text = "Could not find assignment: " + searchName)
+        searchName = nameEntry.get()
+        assignmentLabel.configure(text = "Could not find assignment: " + searchName)
+        with open("course"+course+".csv", "r", newline="") as csvfile:
+            reader = csv.reader(csvfile)
+            for line in reader:
+                if (searchName == line[0]):
+                    assignmentLabel.configure(text = "Assignment Found: " + line[0])
+                    break
 
     def Remove():
-        try:
-            searchName = nameEntry.get()
-            courseFile = []
-            with open("course"+course+".csv", "r", newline="") as csvfile:
-                reader = csv.reader(csvfile)
-                for line in reader:
-                    if (line[0] != searchName):
-                        courseFile.append(line)
-            with open("course"+course+".csv", "w", newline="") as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerows(courseFile)
-            assignmentLabel.configure(text = "Assignment removed: " + searchName)
-            import sourceCodeLibrary
-            sourceCodeLibrary.CalculateCourseGrade(course)
-        except:
+        searchName = nameEntry.get()
+        courseFile = []
+        found = False
+        with open("course"+course+".csv", "r", newline="") as csvfile:
+            reader = csv.reader(csvfile)
+            for line in reader:
+                if (line[0] != searchName):
+                    courseFile.append(line)
+                else:
+                    found = True
+        if not found:
             assignmentLabel.configure(text = "Could not remove assignment: " + searchName)
+            return
+        with open("course"+course+".csv", "w", newline="") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerows(courseFile)
+        assignmentLabel.configure(text = "Assignment removed: " + searchName)
+        import sourceCodeLibrary
+        sourceCodeLibrary.CalculateCourseGrade(course)
 
     def Back(course):
         window.destroy()
@@ -60,7 +64,7 @@ def REMOVE_ASSIGNMENT(course):
     searchButton = tk.Button(window, text="Search", bg='grey', fg='white',font=("Helvetica 10 bold"), command = Search)
     searchButton.grid(row = 0, column = 2)
 
-    assignmentLabel = tk.Label(window, text="Assignment Found:", bg='grey', fg='white', font=("Helvetica 12 bold"))
+    assignmentLabel = tk.Label(window, text="", bg='grey', fg='white', font=("Helvetica 12 bold"))
     assignmentLabel.grid(row = 1, column = 0)
 
     removeButton = tk.Button(window, text="Remove", bg='grey', fg='white',font=("Helvetica 10 bold"), command = Remove)

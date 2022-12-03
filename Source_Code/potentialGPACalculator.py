@@ -24,8 +24,12 @@ def POTENTIAL_GPA_CALCULATOR():
         classGPAs = 0
         classCredits = 0
         for entries in classes:
-            classGPAs += sourceCodeLibrary.GradeToGPA(float(entries[1].get())) * float(entries[2].get())
-            classCredits += float(entries[2].get())
+            try:
+                classGPAs += sourceCodeLibrary.GradeToGPA(float(entries[1].get())) * float(entries[2].get())
+                classCredits += float(entries[2].get())
+            except:
+                gpalab.configure(text = "Your Grade and Credits must be numbers.")
+                return
         try:
             classGPAs /= classCredits
         except:
