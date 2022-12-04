@@ -27,6 +27,7 @@ def LOGIN():
         password = passwordEntry.get()
         loginFound = False
         accountFile = ""
+        gpa = ""
         for path in os.listdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts")):
             if os.path.isdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", path)):
                 os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, "Accounts", path))
@@ -36,6 +37,7 @@ def LOGIN():
                         if (username == line[0] and password == line[1]):
                             loginFound = True
                             accountFile = path
+                            gpa = line[2]
                             break
             if (loginFound):
                 break
@@ -43,8 +45,9 @@ def LOGIN():
             os.chdir(pathlib.Path(__file__).parent.resolve())
             with open("currentLogin.csv", "w", newline = "") as csvfile:
                 writer = csv.writer(csvfile)
-                writer.writerow([accountFile, "GPA: 0"])
+                writer.writerow([accountFile, gpa])
             import sourceCodeLibrary
+            os.chdir(pathlib.Path(__file__).parent.resolve())
             if os.path.exists("semesterInfo.csv"):
                 sourceCodeLibrary.CalculateCumulativeGPA()
             window.destroy()
