@@ -33,8 +33,10 @@ def ADD_ASSIGNMENT(course):
             with open("course"+course+".csv", "a", newline="") as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerow([name, grade, weight])
-            addLabel.configure(text = "Assignment added: " + name)
             sourceCodeLibrary.CalculateCourseGrade(course)
+            window.destroy()
+            import classManager
+            classManager.CLASS_MANAGER(course)
     
     def Back(course):
         window.destroy()

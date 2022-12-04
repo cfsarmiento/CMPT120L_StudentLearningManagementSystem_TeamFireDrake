@@ -125,15 +125,15 @@ def MAIN_PAGE():
             elif (year > sortedYear):
                 sortedSemesters.append(semester)
                 break
-
-    for i, file in enumerate(os.listdir(os.path.join(os.getcwd(), mostRecentSemesterFile)), start = 1):
+    
+    #BUG it seems each button opens the same course page. I can't figure out how to make each button open a different course page
+    for i, file in enumerate(os.listdir(os.path.join(os.getcwd(), mostRecentSemesterFile))):
         if (os.path.isfile(os.path.join(os.getcwd(), mostRecentSemesterFile, file)) and file != "semesterInfo.csv"):
             course = file[file.index("e")+1:file.rindex(".")]
-            tk.Button(frame3,bg="Gray",fg="White",text=course,font='Helvetica 12 bold', command=lambda: Class(course)).grid(row=3+i,column=0,pady=5)
+            tk.Button(frame3,bg="Gray",fg="White",text=course,font='Helvetica 12 bold', command = lambda course = course: Class(course)).grid(row=4+i,column=0,pady=5)
 
     frame4=tk.Frame(window,bg="Gray",highlightbackground="White",highlightthickness=1,width=500,height=100)
     frame4.grid(row=1,column=1)
-    #textBox1=Text(frame4, bg="Gray", fg="White").grid(row=1, column=0)
     yearFrame = tk.Frame(frame4, bg = "Gray", width = 166, height = 300, padx = 30)
     yearFrame.grid(row=0,column=0)
     semesterFrame = tk.Frame(frame4, bg = "Gray", width = 166, height = 300, padx = 30)
@@ -154,7 +154,6 @@ def MAIN_PAGE():
     frame6=tk.Frame(window,bg="Gray",highlightbackground="White",highlightthickness=1,width=500,height=150)
     frame6.grid(row=2,column=0)
     ftsLabel = tk.Label(frame6, bg = 'grey', fg = 'White', text = "First Time?\n\n1. Add Current Semester\n\t--> input info\n2. Adjust Current Semester\n\t--> Add Class\n\t\t--> input info\n3. That Class (left side)\n\t--> Add Assignment\n\t\t--> input info\n3. Add Previous Semester (if applicable)\n\t--> input info",font = 'Helvetica 12 bold', justify=LEFT)
-    # old text: 'First Time Setup Users:\n 1. Add Currest Semester Button\n2. Add Classes (Adjust Current Semester)\n3. Add Grades(Adjust Current Semester)\n4. Add Previous Semester GPA (if Applicable)'
     ftsLabel.grid(row=2,column=0,sticky = W)
 
     # iterates through the files and prints the year, session, and gpa into the GUI

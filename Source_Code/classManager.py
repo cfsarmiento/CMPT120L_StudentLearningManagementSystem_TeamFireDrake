@@ -46,8 +46,8 @@ def CLASS_MANAGER(course):
         window.destroy()
         import removeAssignment
         removeAssignment.REMOVE_ASSIGNMENT(course)
-
-    courseInfoLabel = tk.Label(window, bg="grey", fg="white", text="\t\t".join(info), font='Helvetica 12 bold').grid(row=0,column=0)
+    
+    courseInfoLabel = tk.Label(window, bg="grey", fg="white", text=f"{info[0]}\t{info[1]}\t"+"Grade: {:0.2f}".format(float(info[2][info[2].rindex(" ")+1:])), font='Helvetica 12 bold').grid(row=0,column=0)
 
     backButton = tk.Button(window,text = 'Back',bg = 'grey', fg='white', font='Helvetica 12 bold',padx = 55,command = Back)
     backButton.grid(row = 1, column = 0)

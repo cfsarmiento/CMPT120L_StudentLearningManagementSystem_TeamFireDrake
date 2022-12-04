@@ -47,9 +47,11 @@ def REMOVE_ASSIGNMENT(course):
         with open("course"+course+".csv", "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerows(courseFile)
-        assignmentLabel.configure(text = "Assignment removed: " + searchName)
         import sourceCodeLibrary
         sourceCodeLibrary.CalculateCourseGrade(course)
+        window.destroy()
+        import classManager
+        classManager.CLASS_MANAGER(course)
 
     def Back(course):
         window.destroy()
