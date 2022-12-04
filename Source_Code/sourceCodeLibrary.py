@@ -77,8 +77,8 @@ def CalculateCumulativeGPA():
             with open("semesterInfo.csv", "r", newline="") as csvfile:
                 reader = csv.reader(csvfile)
                 for row in reader:
-                    cumulativeGPA += float(row[2][row[2].rindex(" ")+1:])
                     cumulativeCredits += float(row[3][row[3].rindex(" ")+1:])
+                    cumulativeGPA += float(row[2][row[2].rindex(" ")+1:]) * cumulativeCredits
                     i += 1
                     break
     if (cumulativeCredits == 0):
@@ -97,6 +97,17 @@ def CalculateCumulativeGPA():
     with open("loginInfo.csv", "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(loginInfo)
+    os.chdir(pathlib.Path(__file__).parent.resolve())
+    currentLogin = []
+    with open("currentLogin.csv", "r", newline = "") as csvfile:
+        reader = csv.reader(csvfile)
+        for line in reader:
+            currentLogin = line
+            currentLogin[1] = "GPA: " + str(cumulativeGPA)
+            break
+    with open("currentLogin.csv", "w", newline = "") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(currentLogin)
 
 # converts a grade in 0-100 scale to GPA in 0-4 scale
 def GradeToGPA(grade):
